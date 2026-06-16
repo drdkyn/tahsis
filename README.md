@@ -154,4 +154,4 @@ MIT License - Detaylar için LICENSE dosyasına bakın
 ---
 
 **Not:** Bu proje açık kaynaktır ve eğitim/kişisel kullanım amaçlıdır.
-SGK ile olan resmi işlemlerinizde her zaman onların verdiği bilgileri ve belgelerinizi referans alınız..
+SGK ile olan resmi işlemlerinizde her zaman onların verdiği bilgileri ve belgelerinizi referans alınız...
