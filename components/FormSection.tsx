@@ -34,6 +34,40 @@ export default function FormSection({
     <div className="card sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto">
       <h2 className="text-lg font-semibold text-gray-900 mb-6">Sigortalı Bilgileri</h2>
 
+      {/* ========== STATÜ SEÇİMİ (EN ÜST) ========== */}
+      <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-300">
+        <label className="block text-sm font-semibold text-gray-900 mb-3">
+          Sigortalılık Statüsü <span className="text-red-500">*</span>
+        </label>
+        <div className="space-y-2">
+          {[
+            { value: '4a', label: '4/a (SSK)' },
+            { value: '4b', label: '4/b (Bağ-Kur)' },
+            { value: '4c', label: '4/c (Memur)' },
+            { value: '2925', label: '2925 (Tarım Sigortası)' },
+          ].map((stat) => (
+            <label key={stat.value} className="flex items-center cursor-pointer">
+              <input
+                type="radio"
+                name="statular"
+                value={stat.value}
+                checked={form.statular.length > 0 && form.statular[0] === stat.value}
+                onChange={() => {
+                  onCheckbox(stat.value);
+                }}
+                className="w-4 h-4 text-blue-600 rounded border-gray-300"
+              />
+              <span className="ml-2 text-sm text-gray-700 font-medium">{stat.label}</span>
+            </label>
+          ))}
+        </div>
+        {errors.statular && (
+          <p className="text-xs text-red-600 mt-2">{errors.statular}</p>
+        )}
+      </div>
+
+      {/* ========== FORM ALANLARI ========== */}
+
       {/* Birth Date */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -60,14 +94,15 @@ export default function FormSection({
           name="cinsiyet"
           value={form.cinsiyet}
           onChange={onFormChange}
-          className="input-field"
+          className={`input-field ${errors.cinsiyet ? 'border-red-500' : ''}`}
         >
           <option value="erkek">Erkek</option>
           <option value="kadin">Kadın</option>
         </select>
+        {errors.cinsiyet && <p className="text-xs text-red-600 mt-1">{errors.cinsiyet}</p>}
       </div>
 
-      {/* First Work Date */}
+      {/* First Employment Date */}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">
           İlk İşe Giriş Tarihi <span className="text-red-500">*</span>
@@ -166,7 +201,7 @@ export default function FormSection({
       </div>
 
       {/* Engelli Checkbox (4/a için) */}
-      {form.statular.includes('4a') && (
+      {form.statular.length > 0 && form.statular[0] === '4a' && (
         <div className="mb-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
           <label className="flex items-center cursor-pointer">
             <input
@@ -187,34 +222,6 @@ export default function FormSection({
           </p>
         </div>
       )}
-
-      {/* Statü Seçimi */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-3">
-          Sigortalılık Statüsü <span className="text-red-500">*</span>
-        </label>
-        <div className="space-y-2">
-          {[
-            { value: '4a', label: '4/a (SSK)' },
-            { value: '4b', label: '4/b (Bağ-Kur)' },
-            { value: '4c', label: '4/c (Memur)' },
-            { value: '2925', label: '2925 (Tarım Sigortası)' },
-          ].map((stat) => (
-            <label key={stat.value} className="flex items-center">
-              <input
-                type="checkbox"
-                checked={form.statular.includes(stat.value)}
-                onChange={() => onCheckbox(stat.value)}
-                className="w-4 h-4 text-blue-600 rounded border-gray-300"
-              />
-              <span className="ml-2 text-sm text-gray-700">{stat.label}</span>
-            </label>
-          ))}
-        </div>
-        {errors.statular && (
-          <p className="text-xs text-red-600 mt-2">{errors.statular}</p>
-        )}
-      </div>
 
       {/* Hesapla Button */}
       <button

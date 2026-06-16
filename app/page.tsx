@@ -65,17 +65,11 @@ export default function Home() {
   };
 
   const handleCheckbox = (statü: string) => {
-    if (form.statular.includes(statü)) {
-      setForm({
-        ...form,
-        statular: form.statular.filter((s) => s !== statü),
-      });
-    } else {
-      setForm({
-        ...form,
-        statular: [...form.statular, statü],
-      });
-    }
+    // Radio button: sadece bir seçim
+    setForm({
+      ...form,
+      statular: [statü], // Her zaman sadece bir element
+    });
     if (errors.statular) {
       const newErrors = { ...errors };
       delete newErrors.statular;

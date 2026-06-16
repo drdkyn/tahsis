@@ -130,10 +130,9 @@ emeklilik-hesaplama/
 
 ## Şartlar ve Koşullar ⚖️
 
-**ÖNEMLİ:** Bu araç bilgilendirme amaçlıdır. Kesin bilgi için SGK'ya başvurunuz.
+Bu araç bilgilendirme amaçlıdır. Kesin bilgi için SGK'ya başvurunuz.
 
 - Hesaplamalar 5510 SK ve ilgili yönetmeliklere dayanmaktadır
-- Her hesaplamadan bir kaydı tutunuz
 - SGK kaydında farklılık varsa resmi kayıtlar geçerlidir
 
 ## Katkı 🤝
