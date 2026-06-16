@@ -193,7 +193,7 @@ export default function Home() {
             <li>5510 SK - Ana yaşlılık, 15 yıl + gün koşulları</li>
             <li>2926 SK - Tarım Bağ-Kuru emekliliği</li>
             <li>Maden Yeraltı emekliliği</li>
-            <li>Kesin bilgi için SGK'ya başvurunuz</li>
+            <li>Kesin bilgi için SGK&apos;ya başvurunuz</li>
           </ul>
         </div>
       </div>
