@@ -124,6 +124,17 @@ export const SK284_4C = [
   },
 ];
 
+export const SK284_2925 = [
+  {
+    adi: 'Tüm tarihler',
+    koşul: (girisGunu: Date) => true,
+    cinsiyet: {
+      kadin: { hizmetYili: 15, gun: 3600, yas: null },
+      erkek: { hizmetYili: 15, gun: 3600, yas: null },
+    },
+  },
+];
+
 // ============================================================================
 // SK 28/5 - İŞE GİRDİKTEN SONRA MALÜL (Derece-Bazlı)
 // ============================================================================
@@ -146,6 +157,12 @@ export const SK285_4C = {
   '%60+': { hizmetYili: 10, gun: 5760, yas: null },
 };
 
+export const SK285_2925 = {
+  '%40-%49': { hizmetYili: 15, gun: 3600, yas: null },
+  '%50-%59': { hizmetYili: 12, gun: 3600, yas: null },
+  '%60+': { hizmetYili: 10, gun: 3600, yas: null },
+};
+
 // ============================================================================
 // HELPER FUNCTIONS
 // ============================================================================
@@ -159,6 +176,7 @@ export const getSK284Sarti = (
     '4a': SK284_4A,
     '4b': SK284_4B,
     '4c': SK284_4C,
+    '2925': SK284_2925,
   };
 
   const tablo = tablolar[statü as keyof typeof tablolar];
@@ -181,6 +199,7 @@ export const getSK285Sarti = (statü: string, derece: string) => {
     '4a': SK285_4A,
     '4b': SK285_4B,
     '4c': SK285_4C,
+    '2925': SK285_2925,
   };
 
   const tablo = tablolar[statü as keyof typeof tablolar];

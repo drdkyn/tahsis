@@ -569,6 +569,90 @@ export const hesaplaEmeklilik = (
 
   // ========== 2925 (Tarım Sigortası) ==========
   if (statular.includes('2925')) {
+    // ===== SK 28/4 - İLK İŞE GİRİŞTE MALÜL (Yaşsız) =====
+    if (malulBirimi === 'sk28/4') {
+      const sk284Sarti = getSK284Sarti('2925', ilkGirisTar, cinsiyet);
+      
+      if (sk284Sarti) {
+        const kosullar = [];
+        
+        if (sk284Sarti.hizmetYili) {
+          kosullar.push({
+            ad: 'Hizmet Yılı',
+            gerekli: sk284Sarti.hizmetYili,
+            sahip: hizmetYili,
+            basarili: hizmetYili >= sk284Sarti.hizmetYili,
+          });
+        }
+        
+        if (sk284Sarti.yas) {
+          kosullar.push({
+            ad: 'Yaş',
+            gerekli: sk284Sarti.yas,
+            sahip: yas,
+            basarili: yas >= sk284Sarti.yas,
+          });
+        }
+        
+        kosullar.push({
+          ad: `Prim Günü (${sk284Sarti.gun} gün)`,
+          gerekli: sk284Sarti.gun,
+          sahip: priGunleri,
+          basarili: priGunleri >= sk284Sarti.gun,
+        });
+
+        const tumKosullarBasarili = kosullar.every((k) => k.basarili);
+
+        emeklilikKosullari.push({
+          adi: `2925 (Tarım) - SK 28/4 ${sk284Sarti.adi}`,
+          kosullar,
+          tamamlandi: tumKosullarBasarili,
+        });
+      }
+    }
+
+    // ===== SK 28/5 - MALÜLÜK EMEKLİLİĞİ (Dereceli) =====
+    if (malulBirimi === 'sk28/5' && malulDerece) {
+      const sk285Sarti = getSK285Sarti('2925', malulDerece);
+      
+      if (sk285Sarti) {
+        let gerekliHizmetYili = sk285Sarti.hizmetYili;
+        let gerekliGunSayisi = sk285Sarti.gunSayisi;
+
+        if (bagimaMuhtac) {
+          gerekliHizmetYili = gerekliHizmetYili ? 10 : null;
+          gerekliGunSayisi = Math.floor(sk285Sarti.gunSayisi * 0.7);
+        }
+
+        const kosullar = [];
+        
+        if (gerekliHizmetYili) {
+          kosullar.push({
+            ad: 'Hizmet Yılı',
+            gerekli: gerekliHizmetYili,
+            sahip: hizmetYili,
+            basarili: hizmetYili >= gerekliHizmetYili,
+          });
+        }
+
+        kosullar.push({
+          ad: `Prim Günü (${gerekliGunSayisi} gün)`,
+          gerekli: gerekliGunSayisi,
+          sahip: priGunleri,
+          basarili: priGunleri >= gerekliGunSayisi,
+        });
+
+        let tamamlandi = kosullar.every((k) => k.basarili);
+
+        emeklilikKosullari.push({
+          adi: `2925 (Tarım) - SK 28/5 Malüllük (${malulDerece})${bagimaMuhtac ? ' - Bakıma Muhtaç' : ''}`,
+          kosullar,
+          tamamlandi,
+        });
+      }
+    }
+
+    // Yaştan Emeklilik
     emeklilikKosullari.push({
       adi: '2925 (Tarım Sigortası) - Yaştan Emeklilik',
       kosullar: [
