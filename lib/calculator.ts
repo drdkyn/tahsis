@@ -76,8 +76,19 @@ export const hesaplaEmeklilik = (
     hesaplananIlkIsGirisTarihi = ilkGirisTar.toLocaleDateString('tr-TR');
   }
 
+  // ========== 18 YAŞ KURALI (4/a İÇİN) ==========
+  // Hizmet yılı hesaplaması 18 yaştan önceki dönemi saymaz
+  const dogum18Yas = new Date(dogumTar);
+  dogum18Yas.setFullYear(dogum18Yas.getFullYear() + 18);
+  
+  // Hizmet yılının başlangıcı: 18 yaş vs ilk işe giriş tarihinden daha sonrası
+  let hizmetBaslangici = ilkGirisTar;
+  if (ilkGirisTar < dogum18Yas) {
+    hizmetBaslangici = dogum18Yas; // 18 yaş tarihinden başla
+  }
+
   const yas = dateFark(dogumTar, simdiBugnu);
-  const hizmetYili = dateFark(ilkGirisTar, simdiBugnu);
+  const hizmetYili = dateFark(hizmetBaslangici, simdiBugnu); // 18 yaşından itibaren
   const priGunleri = priGunu + askerlikBorclanlmasi;
 
   const emeklilikKosullari: EmeklilikKosulu[] = [];
