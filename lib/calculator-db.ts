@@ -107,7 +107,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
     for (const rule of statusRules.age) {
       if (!isGecerli(rule)) continue;
       const { kosullar, uygun } = buildKosullar(rule);
-      results.push({ name: `${rule.name} (Kısmi)`, type: 'age', uygun, kosullar });
+      results.push({ name: rule.name, type: 'age', uygun, kosullar });
     }
   }
 

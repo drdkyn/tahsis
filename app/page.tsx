@@ -154,7 +154,7 @@ export default function Home() {
     }, 100);
   };
 
-  const malulSeçildi = form.malulBirimi && form.malulBirimi !== 'yok';
+  const malulSeçildi = sonuclar ? sonuclar.some(s => s.type === 'disability') : (form.malulBirimi && form.malulBirimi !== 'yok');
 
   // Sonuçları sırala: malüllük seçildiyse disability önce, sonra normal ve yaştan
   // gecerli olmayanlar her grubun sonuna atılır
@@ -266,11 +266,13 @@ export default function Home() {
                             UYGUN
                           </span>
                         )}
-                        {sonuc.type === 'disability' && (
-                          <span className="bg-purple-100 text-purple-700 text-xs font-semibold px-2 py-1 rounded-full shrink-0 ml-1">
-                            Malüllük
-                          </span>
-                        )}
+                        <span className={`text-xs font-semibold px-2 py-1 rounded-full shrink-0 ml-1 ${
+                          sonuc.type === 'disability' ? 'bg-purple-100 text-purple-700' :
+                          sonuc.type === 'age' ? 'bg-orange-100 text-orange-700' :
+                          'bg-blue-100 text-blue-700'
+                        }`}>
+                          {sonuc.type === 'disability' ? 'Malüllük' : sonuc.type === 'age' ? 'Kısmi' : 'Normal'}
+                        </span>
                       </div>
 
                       {/* Koşullar */}

@@ -2,7 +2,7 @@
   "4a": {
     "normal": [
       {
-        "name": "08.09.1999 Öncesi (EYT)",
+        "name": "Normal Emeklilik — 08.09.1999 Öncesi (EYT)",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 25,
@@ -11,7 +11,7 @@
         "ageMan": 60
       },
       {
-        "name": "09.09.1999-30.04.2008",
+        "name": "Normal Emeklilik — 09.09.1999-30.04.2008",
         "dateFrom": "1999-09-09",
         "dateTo": "2008-04-30",
         "serviceYears": null,
@@ -20,7 +20,7 @@
         "ageMan": 60
       },
       {
-        "name": "01.05.2008-31.12.2035",
+        "name": "Normal Emeklilik — 01.05.2008-31.12.2035",
         "dateFrom": "2008-05-01",
         "dateTo": "2035-12-31",
         "serviceYears": null,
@@ -29,7 +29,7 @@
         "ageMan": 60
       },
       {
-        "name": "01.01.2036-31.12.2037",
+        "name": "Normal Emeklilik — 01.01.2036-31.12.2037",
         "dateFrom": "2036-01-01",
         "dateTo": "2037-12-31",
         "serviceYears": null,
@@ -38,7 +38,7 @@
         "ageMan": 61
       },
       {
-        "name": "01.01.2038-31.12.2039",
+        "name": "Normal Emeklilik — 01.01.2038-31.12.2039",
         "dateFrom": "2038-01-01",
         "dateTo": "2039-12-31",
         "serviceYears": null,
@@ -47,7 +47,7 @@
         "ageMan": 62
       },
       {
-        "name": "01.01.2040-31.12.2041",
+        "name": "Normal Emeklilik — 01.01.2040-31.12.2041",
         "dateFrom": "2040-01-01",
         "dateTo": "2041-12-31",
         "serviceYears": null,
@@ -56,7 +56,7 @@
         "ageMan": 63
       },
       {
-        "name": "01.01.2042-31.12.2043",
+        "name": "Normal Emeklilik — 01.01.2042-31.12.2043",
         "dateFrom": "2042-01-01",
         "dateTo": "2043-12-31",
         "serviceYears": null,
@@ -65,7 +65,7 @@
         "ageMan": 64
       },
       {
-        "name": "01.01.2044-31.12.2045",
+        "name": "Normal Emeklilik — 01.01.2044-31.12.2045",
         "dateFrom": "2044-01-01",
         "dateTo": "2045-12-31",
         "serviceYears": null,
@@ -74,7 +74,7 @@
         "ageMan": 65
       },
       {
-        "name": "01.01.2046+",
+        "name": "Normal Emeklilik — 01.01.2046+",
         "dateFrom": "2046-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
@@ -85,7 +85,7 @@
     ],
     "age": [
       {
-        "name": "08.09.1999 Öncesi YAŞTAN",
+        "name": "Yaşlılık (Kısmi) — 08.09.1999 Öncesi",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 15,
@@ -94,7 +94,7 @@
         "ageMan": 55
       },
       {
-        "name": "01.05.2008-31.12.2035",
+        "name": "Yaşlılık (Kısmi) — 01.05.2008-31.12.2035",
         "dateFrom": "2008-05-01",
         "dateTo": "2035-12-31",
         "serviceYears": null,
@@ -103,7 +103,7 @@
         "ageMan": 63
       },
       {
-        "name": "01.01.2036-31.12.2037",
+        "name": "Yaşlılık (Kısmi) — 01.01.2036-31.12.2037",
         "dateFrom": "2036-01-01",
         "dateTo": "2037-12-31",
         "serviceYears": null,
@@ -112,7 +112,7 @@
         "ageMan": 64
       },
       {
-        "name": "01.01.2038-31.12.2039",
+        "name": "Yaşlılık (Kısmi) — 01.01.2038-31.12.2039",
         "dateFrom": "2038-01-01",
         "dateTo": "2039-12-31",
         "serviceYears": null,
@@ -121,7 +121,7 @@
         "ageMan": 65
       },
       {
-        "name": "01.01.2040+",
+        "name": "Yaşlılık (Kısmi) — 01.01.2040+",
         "dateFrom": "2040-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
@@ -169,7 +169,7 @@
   "4b": {
     "normal": [
       {
-        "name": "08.09.1999 Öncesi",
+        "name": "Normal Emeklilik — 08.09.1999 Öncesi",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 20,
@@ -178,7 +178,7 @@
         "ageMan": null
       },
       {
-        "name": "09.09.1999-30.04.2008",
+        "name": "Normal Emeklilik — 09.09.1999-30.04.2008",
         "dateFrom": "1999-09-09",
         "dateTo": "2008-04-30",
         "serviceYears": 25,
@@ -187,7 +187,7 @@
         "ageMan": 60
       },
       {
-        "name": "01.05.2008-31.12.2035",
+        "name": "Normal Emeklilik — 01.05.2008-31.12.2035",
         "dateFrom": "2008-05-01",
         "dateTo": "2035-12-31",
         "serviceYears": null,
@@ -196,7 +196,7 @@
         "ageMan": 60
       },
       {
-        "name": "01.01.2036-31.12.2037",
+        "name": "Normal Emeklilik — 01.01.2036-31.12.2037",
         "dateFrom": "2036-01-01",
         "dateTo": "2037-12-31",
         "serviceYears": null,
@@ -205,7 +205,7 @@
         "ageMan": 61
       },
       {
-        "name": "01.01.2038-31.12.2039",
+        "name": "Normal Emeklilik — 01.01.2038-31.12.2039",
         "dateFrom": "2038-01-01",
         "dateTo": "2039-12-31",
         "serviceYears": null,
@@ -214,7 +214,7 @@
         "ageMan": 62
       },
       {
-        "name": "01.01.2040-31.12.2041",
+        "name": "Normal Emeklilik — 01.01.2040-31.12.2041",
         "dateFrom": "2040-01-01",
         "dateTo": "2041-12-31",
         "serviceYears": null,
@@ -223,7 +223,7 @@
         "ageMan": 63
       },
       {
-        "name": "01.01.2042-31.12.2043",
+        "name": "Normal Emeklilik — 01.01.2042-31.12.2043",
         "dateFrom": "2042-01-01",
         "dateTo": "2043-12-31",
         "serviceYears": null,
@@ -232,7 +232,7 @@
         "ageMan": 64
       },
       {
-        "name": "01.01.2044+",
+        "name": "Normal Emeklilik — 01.01.2044+",
         "dateFrom": "2044-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
@@ -243,7 +243,7 @@
     ],
     "age": [
       {
-        "name": "08.09.1999 Öncesi YAŞTAN",
+        "name": "Yaşlılık (Kısmi) — 08.09.1999 Öncesi",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 15,
@@ -252,7 +252,7 @@
         "ageMan": 58
       },
       {
-        "name": "09.09.1999-30.04.2008 YAŞTAN",
+        "name": "Yaşlılık (Kısmi) — 09.09.1999-30.04.2008",
         "dateFrom": "1999-09-09",
         "dateTo": "2008-04-30",
         "serviceYears": 15,
@@ -261,7 +261,7 @@
         "ageMan": 62
       },
       {
-        "name": "01.05.2008-31.12.2035",
+        "name": "Yaşlılık (Kısmi) — 01.05.2008-31.12.2035",
         "dateFrom": "2008-05-01",
         "dateTo": "2035-12-31",
         "serviceYears": null,
@@ -270,7 +270,7 @@
         "ageMan": 63
       },
       {
-        "name": "01.01.2036-31.12.2037",
+        "name": "Yaşlılık (Kısmi) — 01.01.2036-31.12.2037",
         "dateFrom": "2036-01-01",
         "dateTo": "2037-12-31",
         "serviceYears": null,
@@ -279,7 +279,7 @@
         "ageMan": 64
       },
       {
-        "name": "01.01.2038-31.12.2039",
+        "name": "Yaşlılık (Kısmi) — 01.01.2038-31.12.2039",
         "dateFrom": "2038-01-01",
         "dateTo": "2039-12-31",
         "serviceYears": null,
@@ -288,7 +288,7 @@
         "ageMan": 65
       },
       {
-        "name": "01.01.2040+",
+        "name": "Yaşlılık (Kısmi) — 01.01.2040+",
         "dateFrom": "2040-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
@@ -336,7 +336,7 @@
   "2925": {
     "normal": [
       {
-        "name": "08.09.1999 Öncesi",
+        "name": "Normal Emeklilik — 08.09.1999 Öncesi",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 15,
@@ -345,7 +345,7 @@
         "ageMan": null
       },
       {
-        "name": "09.09.1999-30.04.2008",
+        "name": "Normal Emeklilik — 09.09.1999-30.04.2008",
         "dateFrom": "1999-09-09",
         "dateTo": "2008-04-30",
         "serviceYears": 15,
@@ -354,7 +354,7 @@
         "ageMan": 60
       },
       {
-        "name": "01.05.2008+",
+        "name": "Normal Emeklilik — 01.05.2008+",
         "dateFrom": "2008-05-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
@@ -367,7 +367,7 @@
   "4c": {
     "normal": [
       {
-        "name": "08.09.1999 Öncesi",
+        "name": "Normal Emeklilik — 08.09.1999 Öncesi",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 20,
@@ -376,7 +376,7 @@
         "ageMan": null
       },
       {
-        "name": "09.09.1999-30.04.2008",
+        "name": "Normal Emeklilik — 09.09.1999-30.04.2008",
         "dateFrom": "1999-09-09",
         "dateTo": "2008-04-30",
         "serviceYears": 25,
@@ -385,7 +385,7 @@
         "ageMan": 60
       },
       {
-        "name": "01.05.2008-31.12.2035",
+        "name": "Normal Emeklilik — 01.05.2008-31.12.2035",
         "dateFrom": "2008-05-01",
         "dateTo": "2035-12-31",
         "serviceYears": null,
@@ -394,7 +394,7 @@
         "ageMan": 60
       },
       {
-        "name": "01.01.2036-31.12.2037",
+        "name": "Normal Emeklilik — 01.01.2036-31.12.2037",
         "dateFrom": "2036-01-01",
         "dateTo": "2037-12-31",
         "serviceYears": null,
@@ -403,7 +403,7 @@
         "ageMan": 61
       },
       {
-        "name": "01.01.2038-31.12.2039",
+        "name": "Normal Emeklilik — 01.01.2038-31.12.2039",
         "dateFrom": "2038-01-01",
         "dateTo": "2039-12-31",
         "serviceYears": null,
@@ -412,7 +412,7 @@
         "ageMan": 62
       },
       {
-        "name": "01.01.2040-31.12.2041",
+        "name": "Normal Emeklilik — 01.01.2040-31.12.2041",
         "dateFrom": "2040-01-01",
         "dateTo": "2041-12-31",
         "serviceYears": null,
@@ -421,7 +421,7 @@
         "ageMan": 63
       },
       {
-        "name": "01.01.2042-31.12.2043",
+        "name": "Normal Emeklilik — 01.01.2042-31.12.2043",
         "dateFrom": "2042-01-01",
         "dateTo": "2043-12-31",
         "serviceYears": null,
@@ -430,7 +430,7 @@
         "ageMan": 64
       },
       {
-        "name": "01.01.2044+",
+        "name": "Normal Emeklilik — 01.01.2044+",
         "dateFrom": "2044-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
@@ -441,7 +441,7 @@
     ],
     "age": [
       {
-        "name": "08.09.1999 Öncesi YAŞTAN",
+        "name": "Yaşlılık (Kısmi) — 08.09.1999 Öncesi",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 15,
@@ -450,7 +450,7 @@
         "ageMan": 58
       },
       {
-        "name": "09.09.1999-30.04.2008 YAŞTAN",
+        "name": "Yaşlılık (Kısmi) — 09.09.1999-30.04.2008",
         "dateFrom": "1999-09-09",
         "dateTo": "2008-04-30",
         "serviceYears": 15,
@@ -459,7 +459,7 @@
         "ageMan": 62
       },
       {
-        "name": "01.05.2008-31.12.2035",
+        "name": "Yaşlılık (Kısmi) — 01.05.2008-31.12.2035",
         "dateFrom": "2008-05-01",
         "dateTo": "2035-12-31",
         "serviceYears": null,
@@ -468,7 +468,7 @@
         "ageMan": 63
       },
       {
-        "name": "01.01.2036-31.12.2037",
+        "name": "Yaşlılık (Kısmi) — 01.01.2036-31.12.2037",
         "dateFrom": "2036-01-01",
         "dateTo": "2037-12-31",
         "serviceYears": null,
@@ -477,7 +477,7 @@
         "ageMan": 64
       },
       {
-        "name": "01.01.2038-31.12.2039",
+        "name": "Yaşlılık (Kısmi) — 01.01.2038-31.12.2039",
         "dateFrom": "2038-01-01",
         "dateTo": "2039-12-31",
         "serviceYears": null,
@@ -486,7 +486,7 @@
         "ageMan": 65
       },
       {
-        "name": "01.01.2040+",
+        "name": "Yaşlılık (Kısmi) — 01.01.2040+",
         "dateFrom": "2040-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
