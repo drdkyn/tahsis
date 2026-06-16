@@ -20,7 +20,7 @@
   ✅ Real-time Hesaplama   - Anlık sonuçlar
   ✅ MÜKTEZA Tabanlı       - 78 sayfa veri
   ✅ GitHub Integration    - Versiyon kontrolü
-  ✅ Vercel Deploy         - Otomatik yayınlama
+  ✅ Vercel Deploy         - Otomatik yayınlama.
 
 📁 KLASÖRÜ YAPISI
 ─────────────────────────────────────────────────────────────────────────────
