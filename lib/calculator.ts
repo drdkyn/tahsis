@@ -455,7 +455,7 @@ export const hesaplaEmeklilik = (
     });
   }
 
-  // ========== YAKIN EMEKLİLİK ==========
+  // ========== YAKIN EMEKLİLİK - EN ERKEN EMEKLİLİK TARİHİ ==========
   let yakinEmeklilik: {
     adi: string;
     tarih: Date;
@@ -465,16 +465,40 @@ export const hesaplaEmeklilik = (
   if (statular.length > 0) {
     const hedefler: { adi: string; tarih: Date; kalan: number }[] = [];
 
-    if (statular.includes('4a')) {
-      const yasTam = new Date(dogumTar);
-      yasTam.setFullYear(yasTam.getFullYear() + 60);
-      const kalan = dateFark(simdiBugnu, yasTam);
-      if (kalan > 0) {
-        hedefler.push({ adi: '4/a Yaştan (60)', tarih: yasTam, kalan });
+    // Tüm tamamlanan koşullardan emeklilik tarihini hesapla
+    emeklilikKosullari.forEach((kosul) => {
+      if (kosul.tamamlandi) {
+        // Koşulun adından tarih türünü çıkar
+        let tahminiTarih: Date | null = null;
+
+        if (kosul.adi.includes('EYT Yaşsız')) {
+          // EYT yaşsız - hemen (zaten tamamlandıysa)
+          tahminiTarih = new Date(simdiBugnu);
+        } else if (kosul.adi.includes('Yaştan')) {
+          // Yaş şartından emeklilik tarihini hesapla
+          const yasSarti = kosul.kosullar.find((k) => k.ad === 'Yaş');
+          if (yasSarti && yasSarti.gerekli) {
+            const yasTam = new Date(dogumTar);
+            yasTam.setFullYear(yasTam.getFullYear() + yasSarti.gerekli);
+            tahminiTarih = yasTam;
+          }
+        } else if (kosul.adi.includes('Malüllük') || kosul.adi.includes('Engelli')) {
+          // Malüllük emekliği - hemen (zaten tamamlandıysa)
+          tahminiTarih = new Date(simdiBugnu);
+        }
+
+        if (tahminiTarih) {
+          const kalan = dateFark(simdiBugnu, tahminiTarih);
+          if (kalan >= 0) {
+            // Sadece gelecekteki tarihleri ekle
+            hedefler.push({ adi: kosul.adi, tarih: tahminiTarih, kalan });
+          }
+        }
       }
-    }
+    });
 
     if (hedefler.length > 0) {
+      // En erken tarihi seç
       hedefler.sort((a, b) => a.tarih.getTime() - b.tarih.getTime());
       yakinEmeklilik = hedefler[0];
     }

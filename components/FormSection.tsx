@@ -70,6 +70,9 @@ export default function FormSection({
         {errors.statular && (
           <p className="text-xs text-red-600 mt-2">{errors.statular}</p>
         )}
+        {form.statular.length === 0 && !errors.statular && (
+          <p className="text-xs text-orange-600 mt-2">Lütfen sigortalılık statüsünü seçiniz</p>
+        )}
       </div>
 
       {/* ========== MALÜLÜK/ENGELLİLİK (STATÜ SEÇILİ İSE) ========== */}
@@ -198,6 +201,9 @@ export default function FormSection({
           onChange={onFormChange}
           className={`input-field ${errors.dogumTarihi ? 'border-red-500' : ''}`}
         />
+        {!form.dogumTarihi && !errors.dogumTarihi && (
+          <p className="text-xs text-orange-600 mt-1">Lütfen tarihi seçiniz</p>
+        )}
         {errors.dogumTarihi && (
           <p className="text-xs text-red-600 mt-1">{errors.dogumTarihi}</p>
         )}
@@ -232,6 +238,9 @@ export default function FormSection({
           onChange={onFormChange}
           className={`input-field ${errors.ilkIsGirisTarihi ? 'border-red-500' : ''}`}
         />
+        {!form.ilkIsGirisTarihi && !errors.ilkIsGirisTarihi && (
+          <p className="text-xs text-orange-600 mt-1">Lütfen tarihi seçiniz</p>
+        )}
         {errors.ilkIsGirisTarihi && (
           <p className="text-xs text-red-600 mt-1">{errors.ilkIsGirisTarihi}</p>
         )}

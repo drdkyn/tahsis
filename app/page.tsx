@@ -8,16 +8,16 @@ import StatCard from '@/components/StatCard';
 
 export default function Home() {
   const [form, setForm] = useState({
-    dogumTarihi: '1975-05-15',
+    dogumTarihi: '',
     cinsiyet: 'erkek' as 'erkek' | 'kadin',
-    ilkIsGirisTarihi: '1995-09-08',
-    priGunu: 7200,
+    ilkIsGirisTarihi: '',
+    priGunu: 0,
     askerlikBorclanlmasi: 0,
     askerlikNedir: 'sonra' as 'once' | 'sonra',
-    statular: ['4a'] as string[],
+    statular: [] as string[],
     malulBirimi: 'yok',
     malulDerece: '',
-    bagimaMuhtac: false, // Bakıma muhtaçlık
+    bagimaMuhtac: false,
   });
 
   const [hesaplananIlkIsGirisTarihi, setHesaplananIlkIsGirisTarihi] = useState<string>('');
@@ -103,9 +103,24 @@ export default function Home() {
     setForm({ ...form, bagimaMuhtac: value });
   };
 
+  // Input validasyonu - gerekli alanlar boşsa hesaplama yapma
+  const inputsValid = !!(form.dogumTarihi && form.ilkIsGirisTarihi && form.statular.length > 0);
+
   const sonuc = useMemo(
-    () =>
-      hesaplaEmeklilik(
+    () => {
+      // Boş input varsa hesaplama yapma
+      if (!inputsValid) {
+        return {
+          yas: 0,
+          hizmetYili: 0,
+          priGunleri: form.priGunu,
+          hesaplananIlkIsGirisTarihi: '',
+          emeklilikKosullari: [],
+          yakinEmeklilik: null,
+        };
+      }
+
+      return hesaplaEmeklilik(
         form.dogumTarihi,
         form.ilkIsGirisTarihi,
         form.priGunu,
@@ -116,8 +131,9 @@ export default function Home() {
         form.malulBirimi,
         form.malulDerece,
         form.bagimaMuhtac
-      ),
-    [form]
+      );
+    },
+    [form, inputsValid]
   );
 
   // Update hesaplanan tarih state
