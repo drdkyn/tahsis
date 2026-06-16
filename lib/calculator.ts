@@ -1,4 +1,8 @@
-import { getMalullikSaritlari, getMalulDereceleri } from './maluluk-tablosu';
+import { 
+  getMalulDereceleri, 
+  getSK284Sarti, 
+  getSK285Sarti 
+} from './maluluk-tablosu';
 
 export interface EmeklilikKosulu {
   adi: string;

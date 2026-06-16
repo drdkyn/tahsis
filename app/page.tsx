@@ -15,8 +15,8 @@ export default function Home() {
     askerlikBorclanlmasi: 0,
     askerlikNedir: 'sonra' as 'once' | 'sonra',
     statular: [] as string[],
-    malulBirimi: 'yok',
-    malulDerece: '',
+    malulBirimi: 'yok', // 'yok' | 'ilkIste' | 'sk28/5'
+    malulDerece: '', // SK 28/5 için derece
     bagimaMuhtac: false,
   });
 
