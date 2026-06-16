@@ -32,8 +32,7 @@ export interface HesaplamaResultati {
 
 const EYT_SINIR_TARIHI = new Date(1999, 8, 8); // 08.09.1999 DAHİL
 
-// Dönem-bazlı gün tablosu (5510 SK 28/4)
-const ENGELLI_GUN_TABLOSU: { basla: Date; bitis?: Date; gun: number }[] = [
+const ENGELLI_GUN_TABLOSU = [
   { basla: new Date(1900, 0, 1), bitis: new Date(2008, 9, 30), gun: 3600 },
   { basla: new Date(2008, 9, 1), bitis: new Date(2008, 11, 31), gun: 3700 },
   { basla: new Date(2009, 0, 1), bitis: new Date(2009, 11, 31), gun: 3800 },
@@ -41,23 +40,12 @@ const ENGELLI_GUN_TABLOSU: { basla: Date; bitis?: Date; gun: number }[] = [
   { basla: new Date(2011, 0, 1), bitis: undefined, gun: 3960 },
 ];
 
-export const parseDate = (str: string): Date => new Date(str);
-
-export const dateFark = (d1: Date, d2: Date): number => {
-  return Math.floor((d2.getTime() - d1.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+const dateFark = (tarih1: Date, tarih2: Date): number => {
+  const ms = tarih2.getTime() - tarih1.getTime();
+  return Math.floor(ms / (1000 * 60 * 60 * 24));
 };
 
-const getEngelliGun = (tarih: Date): number => {
-  for (const tab of ENGELLI_GUN_TABLOSU) {
-    const bitisTarihi = tab.bitis || new Date(2099, 11, 31);
-    if (tarih >= tab.basla && tarih <= bitisTarihi) {
-      return tab.gun;
-    }
-  }
-  return 3960;
-};
-
-// ============= MAIN CALCULATOR =============
+// ============= MAIN CALCULATION FUNCTION =============
 
 export const hesaplaEmeklilik = (
   dogumTarihi: string,
@@ -71,33 +59,54 @@ export const hesaplaEmeklilik = (
   malulDerece?: string,
   bagimaMuhtac?: boolean
 ): HesaplamaResultati => {
-  const dogumTar = parseDate(dogumTarihi);
-  const originalIlkGirisTar = parseDate(ilkIsGirisTarihi);
+  if (!dogumTarihi || !ilkIsGirisTarihi || statular.length === 0) {
+    return {
+      yas: 0,
+      hizmetYili: 0,
+      priGunleri: priGunu,
+      emeklilikKosullari: [],
+      yakinEmeklilik: null,
+    };
+  }
+
+  const dogumTar = new Date(dogumTarihi);
+  let ilkGirisTar = new Date(ilkIsGirisTarihi);
   const simdiBugnu = new Date();
 
-  let ilkGirisTar = originalIlkGirisTar;
-  let hesaplananIlkIsGirisTarihi = '';
-  
-  if (askerlikNedir === 'once' && askerlikBorclanlmasi > 0) {
-    ilkGirisTar = new Date(originalIlkGirisTar);
-    ilkGirisTar.setDate(ilkGirisTar.getDate() - askerlikBorclanlmasi);
-    hesaplananIlkIsGirisTarihi = ilkGirisTar.toLocaleDateString('tr-TR');
+  // Askerlik borçlanması hesaplaması
+  if (askerlikBorclanlmasi > 0) {
+    if (askerlikNedir === 'once') {
+      const onceki = new Date(ilkGirisTar);
+      onceki.setDate(onceki.getDate() - askerlikBorclanlmasi);
+      ilkGirisTar = onceki;
+    }
   }
 
-  // ========== 18 YAŞ KURALI (4/a İÇİN) ==========
-  // Hizmet yılı hesaplaması 18 yaştan önceki dönemi saymaz
+  // Yaş hesaplaması
+  let yas = simdiBugnu.getFullYear() - dogumTar.getFullYear();
+  const ayFarki =
+    simdiBugnu.getMonth() - dogumTar.getMonth();
+  if (
+    ayFarki < 0 ||
+    (ayFarki === 0 && simdiBugnu.getDate() < dogumTar.getDate())
+  ) {
+    yas--;
+  }
+
+  // Hizmet yılı (18 yaş kuralı 4/a'da)
   const dogum18Yas = new Date(dogumTar);
   dogum18Yas.setFullYear(dogum18Yas.getFullYear() + 18);
-  
-  // Hizmet yılının başlangıcı: 18 yaş vs ilk işe giriş tarihinden daha sonrası
   let hizmetBaslangici = ilkGirisTar;
-  if (ilkGirisTar < dogum18Yas) {
-    hizmetBaslangici = dogum18Yas; // 18 yaş tarihinden başla
+  if (
+    statular.includes('4a') &&
+    ilkGirisTar < dogum18Yas
+  ) {
+    hizmetBaslangici = dogum18Yas;
   }
+  const hizmetYili = dateFark(hizmetBaslangici, simdiBugnu) / 365;
 
-  const yas = dateFark(dogumTar, simdiBugnu);
-  const hizmetYili = dateFark(hizmetBaslangici, simdiBugnu); // 18 yaşından itibaren
-  const priGunleri = priGunu + askerlikBorclanlmasi;
+  const priGunleri = priGunu;
+  const hesaplananIlkIsGirisTarihi = ilkGirisTar.toLocaleDateString('tr-TR');
 
   const emeklilikKosullari: EmeklilikKosulu[] = [];
 
@@ -111,7 +120,7 @@ export const hesaplaEmeklilik = (
           {
             ad: 'Hizmet Yılı',
             gerekli: cinsiyet === 'erkek' ? 25 : 20,
-            sahip: hizmetYili,
+            sahip: Math.floor(hizmetYili),
             basarili: hizmetYili >= (cinsiyet === 'erkek' ? 25 : 20),
           },
           {
@@ -139,7 +148,7 @@ export const hesaplaEmeklilik = (
         {
           ad: 'Hizmet Yılı',
           gerekli: 15,
-          sahip: hizmetYili,
+          sahip: Math.floor(hizmetYili),
           basarili: hizmetYili >= 15,
         },
         {
@@ -155,28 +164,68 @@ export const hesaplaEmeklilik = (
         priGunleri >= 3600,
     });
 
-    // ========== 4/a MALÜLÜK EMEKLİLİĞİ (SK 28/5) ==========
-    // İşe girdikten sonra malül olan sigortalılar
-    if (malulBirimi === 'sk28/5' && malulDerece && statular.includes('4a')) {
-      const malulSarti = getMalullikSaritlari('4a', 'sk28/5', malulDerece);
-      
-      if (malulSarti) {
-        let gerekliHizmetYili = malulSarti.hizmetYili;
-        let gerekliGunSayisi = malulSarti.gunSayisi;
+    // ========== 4/a SK 28/4 - İLK İŞE GİRİŞTE MALÜL (Yaşsız) ==========
+    if (malulBirimi === 'sk28/4') {
+      const sk284Sarti = getSK284Sarti('4a', ilkGirisTar, cinsiyet);
 
-        // Bakıma muhtaçlık durumunda şartlar azalır
+      if (sk284Sarti) {
+        const kosullar = [];
+
+        if (sk284Sarti.hizmetYili) {
+          kosullar.push({
+            ad: 'Hizmet Yılı',
+            gerekli: sk284Sarti.hizmetYili,
+            sahip: Math.floor(hizmetYili),
+            basarili: hizmetYili >= sk284Sarti.hizmetYili,
+          });
+        }
+
+        if (sk284Sarti.yas) {
+          kosullar.push({
+            ad: 'Yaş',
+            gerekli: sk284Sarti.yas,
+            sahip: yas,
+            basarili: yas >= sk284Sarti.yas,
+          });
+        }
+
+        kosullar.push({
+          ad: `Prim Günü (${sk284Sarti.gun} gün)`,
+          gerekli: sk284Sarti.gun,
+          sahip: priGunleri,
+          basarili: priGunleri >= sk284Sarti.gun,
+        });
+
+        const tumKosullarBasarili = kosullar.every((k) => k.basarili);
+
+        emeklilikKosullari.push({
+          adi: `4/a (SSK) - SK 28/4 İlk İşe Girişte Malül`,
+          kosullar,
+          tamamlandi: tumKosullarBasarili,
+        });
+      }
+    }
+
+    // ========== 4/a SK 28/5 - İŞE GİRDİKTEN SONRA MALÜL (Dereceli) ==========
+    if (malulBirimi === 'sk28/5' && malulDerece) {
+      const sk285Sarti = getSK285Sarti('4a', malulDerece);
+
+      if (sk285Sarti) {
+        let gerekliHizmetYili = sk285Sarti.hizmetYili;
+        let gerekliGunSayisi = sk285Sarti.gun;
+
         if (bagimaMuhtac) {
-          gerekliHizmetYili = 10; // Bakıma muhtaç ise 10 yıl yeterli
-          gerekliGunSayisi = Math.floor(malulSarti.gunSayisi * 0.7); // Gün sayısı %70'i
+          gerekliHizmetYili = 10;
+          gerekliGunSayisi = Math.floor(sk285Sarti.gun * 0.7);
         }
 
         emeklilikKosullari.push({
-          adi: `4/a (SSK) - Malüllük Emekliği (${malulDerece})${bagimaMuhtac ? ' - Bakıma Muhtaç' : ''}`,
+          adi: `4/a (SSK) - SK 28/5 Malüllük (${malulDerece})${bagimaMuhtac ? ' - Bakıma Muhtaç' : ''}`,
           kosullar: [
             {
               ad: 'Hizmet Yılı',
               gerekli: gerekliHizmetYili,
-              sahip: hizmetYili,
+              sahip: Math.floor(hizmetYili),
               basarili: hizmetYili >= gerekliHizmetYili,
             },
             {
@@ -186,7 +235,9 @@ export const hesaplaEmeklilik = (
               basarili: priGunleri >= gerekliGunSayisi,
             },
           ],
-          tamamlandi: hizmetYili >= gerekliHizmetYili && priGunleri >= gerekliGunSayisi,
+          tamamlandi:
+            hizmetYili >= gerekliHizmetYili &&
+            priGunleri >= gerekliGunSayisi,
         });
       }
     }
@@ -202,7 +253,7 @@ export const hesaplaEmeklilik = (
           {
             ad: 'Hizmet Yılı',
             gerekli: cinsiyet === 'erkek' ? 25 : 20,
-            sahip: hizmetYili,
+            sahip: Math.floor(hizmetYili),
             basarili: hizmetYili >= (cinsiyet === 'erkek' ? 25 : 20),
           },
           {
@@ -218,13 +269,13 @@ export const hesaplaEmeklilik = (
       });
     }
 
-    // 5510 SK Geçici 9/1 (09.09.1999 - 30.04.2008)
+    // Geçici 9/1 (09.09.1999-30.04.2008)
     if (
       ilkGirisTar > EYT_SINIR_TARIHI &&
-      ilkGirisTar < new Date(2008, 4, 1)
+      ilkGirisTar <= new Date(2008, 3, 30)
     ) {
       emeklilikKosullari.push({
-        adi: '4/b - 5510 SK Geçici 9/1 (09.09.1999-30.04.2008)',
+        adi: '4/b (Bağ-Kur) - 5510 SK Geçici 9/1',
         kosullar: [
           {
             ad: 'Yaş',
@@ -235,7 +286,7 @@ export const hesaplaEmeklilik = (
           {
             ad: 'Hizmet Yılı',
             gerekli: 25,
-            sahip: hizmetYili,
+            sahip: Math.floor(hizmetYili),
             basarili: hizmetYili >= 25,
           },
           {
@@ -252,10 +303,10 @@ export const hesaplaEmeklilik = (
       });
     }
 
-    // 5510 SK Md.28/2 (01.05.2008+)
-    if (ilkGirisTar >= new Date(2008, 4, 1)) {
+    // MD.28/2 (01.05.2008+)
+    if (ilkGirisTar > new Date(2008, 3, 30)) {
       emeklilikKosullari.push({
-        adi: '4/b - 5510 SK Md.28/2 (01.05.2008+)',
+        adi: '4/b (Bağ-Kur) - 5510 SK Md.28/2',
         kosullar: [
           {
             ad: 'Yaş',
@@ -274,39 +325,83 @@ export const hesaplaEmeklilik = (
           yas >= (cinsiyet === 'erkek' ? 60 : 58) && priGunleri >= 9000,
       });
     }
-  }
 
-  // ========== 4/b MALÜLÜK EMEKLİLİĞİ (SK 28/5) ==========
-  if (malulBirimi === 'sk28/5' && malulDerece && statular.includes('4b')) {
-    const malulSarti = getMalullikSaritlari('4b', 'sk28/5', malulDerece);
-    
-    if (malulSarti) {
-      let gerekliHizmetYili = malulSarti.hizmetYili;
-      let gerekliGunSayisi = malulSarti.gunSayisi;
+    // ========== 4/b SK 28/4 - İLK İŞE GİRİŞTE MALÜL ==========
+    if (malulBirimi === 'sk28/4') {
+      const sk284Sarti = getSK284Sarti('4b', ilkGirisTar, cinsiyet);
 
-      if (bagimaMuhtac) {
-        gerekliHizmetYili = 10;
-        gerekliGunSayisi = Math.floor(malulSarti.gunSayisi * 0.7);
-      }
+      if (sk284Sarti) {
+        const kosullar = [];
 
-      emeklilikKosullari.push({
-        adi: `4/b (Bağ-Kur) - Malüllük Emekliği (${malulDerece})${bagimaMuhtac ? ' - Bakıma Muhtaç' : ''}`,
-        kosullar: [
-          {
+        if (sk284Sarti.hizmetYili) {
+          kosullar.push({
             ad: 'Hizmet Yılı',
-            gerekli: gerekliHizmetYili,
-            sahip: hizmetYili,
-            basarili: hizmetYili >= gerekliHizmetYili,
-          },
-          {
-            ad: `Prim Günü (${gerekliGunSayisi} gün)`,
-            gerekli: gerekliGunSayisi,
-            sahip: priGunleri,
-            basarili: priGunleri >= gerekliGunSayisi,
-          },
-        ],
-        tamamlandi: hizmetYili >= gerekliHizmetYili && priGunleri >= gerekliGunSayisi,
-      });
+            gerekli: sk284Sarti.hizmetYili,
+            sahip: Math.floor(hizmetYili),
+            basarili: hizmetYili >= sk284Sarti.hizmetYili,
+          });
+        }
+
+        if (sk284Sarti.yas) {
+          kosullar.push({
+            ad: 'Yaş',
+            gerekli: sk284Sarti.yas,
+            sahip: yas,
+            basarili: yas >= sk284Sarti.yas,
+          });
+        }
+
+        kosullar.push({
+          ad: `Prim Günü (${sk284Sarti.gun} gün)`,
+          gerekli: sk284Sarti.gun,
+          sahip: priGunleri,
+          basarili: priGunleri >= sk284Sarti.gun,
+        });
+
+        const tumKosullarBasarili = kosullar.every((k) => k.basarili);
+
+        emeklilikKosullari.push({
+          adi: `4/b (Bağ-Kur) - SK 28/4 İlk İşe Girişte Malül`,
+          kosullar,
+          tamamlandi: tumKosullarBasarili,
+        });
+      }
+    }
+
+    // ========== 4/b SK 28/5 - İŞE GİRDİKTEN SONRA MALÜL ==========
+    if (malulBirimi === 'sk28/5' && malulDerece) {
+      const sk285Sarti = getSK285Sarti('4b', malulDerece);
+
+      if (sk285Sarti) {
+        let gerekliHizmetYili = sk285Sarti.hizmetYili;
+        let gerekliGunSayisi = sk285Sarti.gun;
+
+        if (bagimaMuhtac) {
+          gerekliHizmetYili = 10;
+          gerekliGunSayisi = Math.floor(sk285Sarti.gun * 0.7);
+        }
+
+        emeklilikKosullari.push({
+          adi: `4/b (Bağ-Kur) - SK 28/5 Malüllük (${malulDerece})${bagimaMuhtac ? ' - Bakıma Muhtaç' : ''}`,
+          kosullar: [
+            {
+              ad: 'Hizmet Yılı',
+              gerekli: gerekliHizmetYili,
+              sahip: Math.floor(hizmetYili),
+              basarili: hizmetYili >= gerekliHizmetYili,
+            },
+            {
+              ad: `Prim Günü (${gerekliGunSayisi} gün)`,
+              gerekli: gerekliGunSayisi,
+              sahip: priGunleri,
+              basarili: priGunleri >= gerekliGunSayisi,
+            },
+          ],
+          tamamlandi:
+            hizmetYili >= gerekliHizmetYili &&
+            priGunleri >= gerekliGunSayisi,
+        });
+      }
     }
   }
 
@@ -320,7 +415,7 @@ export const hesaplaEmeklilik = (
           {
             ad: 'Hizmet Yılı',
             gerekli: cinsiyet === 'erkek' ? 25 : 20,
-            sahip: hizmetYili,
+            sahip: Math.floor(hizmetYili),
             basarili: hizmetYili >= (cinsiyet === 'erkek' ? 25 : 20),
           },
           {
@@ -336,13 +431,13 @@ export const hesaplaEmeklilik = (
       });
     }
 
-    // İstekle Emeklilik (09.09.1999 - 30.04.2008)
+    // İstekle (09.09.1999-30.04.2008)
     if (
       ilkGirisTar > EYT_SINIR_TARIHI &&
-      ilkGirisTar < new Date(2008, 4, 1)
+      ilkGirisTar <= new Date(2008, 3, 30)
     ) {
       emeklilikKosullari.push({
-        adi: '4/c - İstekle Emeklilik (09.09.1999-30.04.2008)',
+        adi: '4/c (Memur) - İstekle Emeklilik',
         kosullar: [
           {
             ad: 'Yaş',
@@ -353,7 +448,7 @@ export const hesaplaEmeklilik = (
           {
             ad: 'Hizmet Yılı',
             gerekli: 25,
-            sahip: hizmetYili,
+            sahip: Math.floor(hizmetYili),
             basarili: hizmetYili >= 25,
           },
           {
@@ -370,10 +465,10 @@ export const hesaplaEmeklilik = (
       });
     }
 
-    // 5510 SK Md.28/2 (01.05.2008+)
-    if (ilkGirisTar >= new Date(2008, 4, 1)) {
+    // MD.28/2 (01.05.2008+)
+    if (ilkGirisTar > new Date(2008, 3, 30)) {
       emeklilikKosullari.push({
-        adi: '4/c - 5510 SK Md.28/2 (01.05.2008+)',
+        adi: '4/c (Memur) - 5510 SK Md.28/2',
         kosullar: [
           {
             ad: 'Yaş',
@@ -392,46 +487,90 @@ export const hesaplaEmeklilik = (
           yas >= (cinsiyet === 'erkek' ? 60 : 58) && priGunleri >= 9000,
       });
     }
-  }
 
-  // ========== 4/c MALÜLÜK EMEKLİLİĞİ (SK 28/5) ==========
-  if (malulBirimi === 'sk28/5' && malulDerece && statular.includes('4c')) {
-    const malulSarti = getMalullikSaritlari('4c', 'sk28/5', malulDerece);
-    
-    if (malulSarti) {
-      let gerekliHizmetYili = malulSarti.hizmetYili;
-      let gerekliGunSayisi = malulSarti.gunSayisi;
+    // ========== 4/c SK 28/4 - ENGELLİ ==========
+    if (malulBirimi === 'sk28/4') {
+      const sk284Sarti = getSK284Sarti('4c', ilkGirisTar, cinsiyet);
 
-      if (bagimaMuhtac) {
-        gerekliHizmetYili = 10;
-        gerekliGunSayisi = Math.floor(malulSarti.gunSayisi * 0.7);
-      }
+      if (sk284Sarti) {
+        const kosullar = [];
 
-      emeklilikKosullari.push({
-        adi: `4/c (Memur) - Malüllük Emekliği (${malulDerece})${bagimaMuhtac ? ' - Bakıma Muhtaç' : ''}`,
-        kosullar: [
-          {
+        if (sk284Sarti.hizmetYili) {
+          kosullar.push({
             ad: 'Hizmet Yılı',
-            gerekli: gerekliHizmetYili,
-            sahip: hizmetYili,
-            basarili: hizmetYili >= gerekliHizmetYili,
-          },
-          {
-            ad: `Prim Günü (${gerekliGunSayisi} gün)`,
-            gerekli: gerekliGunSayisi,
-            sahip: priGunleri,
-            basarili: priGunleri >= gerekliGunSayisi,
-          },
-        ],
-        tamamlandi: hizmetYili >= gerekliHizmetYili && priGunleri >= gerekliGunSayisi,
-      });
+            gerekli: sk284Sarti.hizmetYili,
+            sahip: Math.floor(hizmetYili),
+            basarili: hizmetYili >= sk284Sarti.hizmetYili,
+          });
+        }
+
+        if (sk284Sarti.yas) {
+          kosullar.push({
+            ad: 'Yaş',
+            gerekli: sk284Sarti.yas,
+            sahip: yas,
+            basarili: yas >= sk284Sarti.yas,
+          });
+        }
+
+        kosullar.push({
+          ad: `Prim Günü (${sk284Sarti.gun} gün)`,
+          gerekli: sk284Sarti.gun,
+          sahip: priGunleri,
+          basarili: priGunleri >= sk284Sarti.gun,
+        });
+
+        const tumKosullarBasarili = kosullar.every((k) => k.basarili);
+
+        emeklilikKosullari.push({
+          adi: `4/c (Memur) - SK 28/4 İlk İşe Girişte Engelli`,
+          kosullar,
+          tamamlandi: tumKosullarBasarili,
+        });
+      }
+    }
+
+    // ========== 4/c SK 28/5 - İŞE GİRDİKTEN SONRA MALÜL ==========
+    if (malulBirimi === 'sk28/5' && malulDerece) {
+      const sk285Sarti = getSK285Sarti('4c', malulDerece);
+
+      if (sk285Sarti) {
+        let gerekliHizmetYili = sk285Sarti.hizmetYili;
+        let gerekliGunSayisi = sk285Sarti.gun;
+
+        if (bagimaMuhtac) {
+          gerekliHizmetYili = 10;
+          gerekliGunSayisi = Math.floor(sk285Sarti.gun * 0.7);
+        }
+
+        emeklilikKosullari.push({
+          adi: `4/c (Memur) - SK 28/5 Malüllük (${malulDerece})${bagimaMuhtac ? ' - Bakıma Muhtaç' : ''}`,
+          kosullar: [
+            {
+              ad: 'Hizmet Yılı',
+              gerekli: gerekliHizmetYili,
+              sahip: Math.floor(hizmetYili),
+              basarili: hizmetYili >= gerekliHizmetYili,
+            },
+            {
+              ad: `Prim Günü (${gerekliGunSayisi} gün)`,
+              gerekli: gerekliGunSayisi,
+              sahip: priGunleri,
+              basarili: priGunleri >= gerekliGunSayisi,
+            },
+          ],
+          tamamlandi:
+            hizmetYili >= gerekliHizmetYili &&
+            priGunleri >= gerekliGunSayisi,
+        });
+      }
     }
   }
 
   // ========== 2925 (Tarım Sigortası) ==========
   if (statular.includes('2925')) {
     emeklilikKosullari.push({
-      adi: '2925 (Tarım Sigortası) - Emeklilik',
+      adi: '2925 (Tarım Sigortası) - Yaştan Emeklilik',
       kosullar: [
         {
           ad: 'Yaş',
@@ -442,7 +581,7 @@ export const hesaplaEmeklilik = (
         {
           ad: 'Hizmet Yılı',
           gerekli: 15,
-          sahip: hizmetYili,
+          sahip: Math.floor(hizmetYili),
           basarili: hizmetYili >= 15,
         },
         {
@@ -469,32 +608,31 @@ export const hesaplaEmeklilik = (
   if (statular.length > 0) {
     const hedefler: { adi: string; tarih: Date; kalan: number }[] = [];
 
-    // Tüm tamamlanan koşullardan emeklilik tarihini hesapla
     emeklilikKosullari.forEach((kosul) => {
       if (kosul.tamamlandi) {
-        // Koşulun adından tarih türünü çıkar
         let tahminiTarih: Date | null = null;
 
         if (kosul.adi.includes('EYT Yaşsız')) {
-          // EYT yaşsız - hemen (zaten tamamlandıysa)
           tahminiTarih = new Date(simdiBugnu);
         } else if (kosul.adi.includes('Yaştan')) {
-          // Yaş şartından emeklilik tarihini hesapla
           const yasSarti = kosul.kosullar.find((k) => k.ad === 'Yaş');
           if (yasSarti && yasSarti.gerekli) {
             const yasTam = new Date(dogumTar);
             yasTam.setFullYear(yasTam.getFullYear() + yasSarti.gerekli);
             tahminiTarih = yasTam;
           }
-        } else if (kosul.adi.includes('Malüllük') || kosul.adi.includes('Engelli')) {
-          // Malüllük emekliği - hemen (zaten tamamlandıysa)
+        } else if (
+          kosul.adi.includes('Malüllük') ||
+          kosul.adi.includes('Engelli')
+        ) {
+          tahminiTarih = new Date(simdiBugnu);
+        } else if (kosul.adi.includes('SK 28/4')) {
           tahminiTarih = new Date(simdiBugnu);
         }
 
         if (tahminiTarih) {
           const kalan = dateFark(simdiBugnu, tahminiTarih);
           if (kalan >= 0) {
-            // Sadece gelecekteki tarihleri ekle
             hedefler.push({ adi: kosul.adi, tarih: tahminiTarih, kalan });
           }
         }
@@ -502,7 +640,6 @@ export const hesaplaEmeklilik = (
     });
 
     if (hedefler.length > 0) {
-      // En erken tarihi seç
       hedefler.sort((a, b) => a.tarih.getTime() - b.tarih.getTime());
       yakinEmeklilik = hedefler[0];
     }
@@ -510,7 +647,7 @@ export const hesaplaEmeklilik = (
 
   return {
     yas,
-    hizmetYili,
+    hizmetYili: Math.floor(hizmetYili),
     priGunleri,
     hesaplananIlkIsGirisTarihi,
     emeklilikKosullari,
