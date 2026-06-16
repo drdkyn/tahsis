@@ -14,6 +14,7 @@ export default function Home() {
     priGunu: 7200,
     askerlikBorclanlmasi: 0,
     askerlikNedir: 'sonra' as 'once' | 'sonra',
+    ilkIsGirisOnceEngelliMi: false,
     statular: ['4a'] as string[],
   });
 
@@ -94,6 +95,10 @@ export default function Home() {
     setForm({ ...form, askerlikNedir: nedir });
   };
 
+  const handleEngelliChange = (engelli: boolean) => {
+    setForm({ ...form, ilkIsGirisOnceEngelliMi: engelli });
+  };
+
   const sonuc = useMemo(
     () =>
       hesaplaEmeklilik(
@@ -103,7 +108,8 @@ export default function Home() {
         form.askerlikBorclanlmasi,
         form.askerlikNedir,
         form.cinsiyet,
-        form.statular
+        form.statular,
+        form.ilkIsGirisOnceEngelliMi
       ),
     [form]
   );
@@ -145,6 +151,7 @@ export default function Home() {
               onFormChange={handleFormChange}
               onCheckbox={handleCheckbox}
               onAskerlikChange={handleAskerlikChange}
+              onEngelliChange={handleEngelliChange}
               onHesapla={handleHesapla}
             />
           </div>

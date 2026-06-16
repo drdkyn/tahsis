@@ -37,7 +37,8 @@ export const hesaplaEmeklilik = (
   askerlikBorclanlmasi: number,
   askerlikNedir: 'once' | 'sonra',
   cinsiyet: 'erkek' | 'kadin',
-  statular: string[]
+  statular: string[],
+  ilkIsGirisOnceEngelliMi?: boolean
 ): HesaplamaResultati => {
   const dogumTar = parseDate(dogumTarihi);
   const originalIlkGirisTar = parseDate(ilkIsGirisTarihi);
@@ -109,6 +110,29 @@ export const hesaplaEmeklilik = (
         hizmetYili >= 15 &&
         priGunleri >= 3600,
     });
+
+    // Engelli Emeklilik (İlk işe girişten ÖNCE engelli)
+    if (ilkIsGirisOnceEngelliMi) {
+      const engelliGun = getEngelliGun(parseDate(ilkIsGirisTarihi));
+      emeklilikKosullari.push({
+        adi: '4/a (SSK) - Engelli Emeklilik (Yaşsız)',
+        kosullar: [
+          {
+            ad: 'Hizmet Yılı',
+            gerekli: 15,
+            sahip: hizmetYili,
+            basarili: hizmetYili >= 15,
+          },
+          {
+            ad: `Prim Günü (${engelliGun} gün)`,
+            gerekli: engelliGun,
+            sahip: priGunleri,
+            basarili: priGunleri >= engelliGun,
+          },
+        ],
+        tamamlandi: hizmetYili >= 15 && priGunleri >= engelliGun,
+      });
+    }
   }
 
   // 4/b
@@ -226,4 +250,24 @@ export const hesaplaEmeklilik = (
     emeklilikKosullari,
     yakinEmeklilik,
   };
+};
+
+// === ENGELLI EMEKLILIK DESTEĞI (4/a) ===
+// Dönem-bazlı gün tablosu (5510 SK 28/4)
+const ENGELLI_GUN_TABLOSU: { basla: Date; bitis?: Date; gun: number }[] = [
+  { basla: new Date(1900, 0, 1), bitis: new Date(2008, 9, 30), gun: 3600 },
+  { basla: new Date(2008, 9, 1), bitis: new Date(2008, 11, 31), gun: 3700 },
+  { basla: new Date(2009, 0, 1), bitis: new Date(2009, 11, 31), gun: 3800 },
+  { basla: new Date(2010, 0, 1), bitis: new Date(2010, 11, 31), gun: 3900 },
+  { basla: new Date(2011, 0, 1), bitis: undefined, gun: 3960 },
+];
+
+const getEngelliGun = (tarih: Date): number => {
+  for (const tab of ENGELLI_GUN_TABLOSU) {
+    const bitisTarihi = tab.bitis || new Date(2099, 11, 31);
+    if (tarih >= tab.basla && tarih <= bitisTarihi) {
+      return tab.gun;
+    }
+  }
+  return 3960;
 };
