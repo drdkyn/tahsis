@@ -148,18 +148,12 @@ export default function FormSection({
                         <option value="%50-%59">%50–%59 (Orta)</option>
                         <option value="%40-%49">%40–%49 (Hafif)</option>
                       </>
-                    ) : statu === '2925' ? (
-                      // 2925'de %60+ var
+                    ) : (
+                      // 4a, 4b, 2925: %40-49, %50-59, %60+
                       <>
                         <option value="%40-%49">%40–%49 (Hafif)</option>
                         <option value="%50-%59">%50–%59 (Orta)</option>
                         <option value="%60+">%60+ (Ağır)</option>
-                      </>
-                    ) : (
-                      // 4a, 4b'de %60+ yok, sadece %50-59 ve %40-49
-                      <>
-                        <option value="%40-%49">%40–%49 (Hafif)</option>
-                        <option value="%50-%59">%50–%59 (Orta)</option>
                       </>
                     )}
                   </select>
