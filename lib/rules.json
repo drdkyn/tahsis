@@ -366,18 +366,6 @@
     ],
     "disability": [
       {
-        "name": "SK 28/5 %60+ (Ağır) — 2004-2008 (4a)",
-        "dateFrom": "2004-01-01",
-        "dateTo": "2008-09-30",
-        "days": 1800,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 10,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": null
-      },
-      {
         "name": "5510 SK 28/4 — İlk İşe Girişte Malül (2008/10 öncesi)",
         "dateFrom": "1976-09-08",
         "dateTo": "2008-09-30",
@@ -977,18 +965,6 @@
     ],
     "disability": [
       {
-        "name": "SK 28/5 %60+ (Ağır) — 2004-2008 (4b)",
-        "dateFrom": "2004-01-01",
-        "dateTo": "2008-09-30",
-        "days": 1800,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 10,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": null
-      },
-      {
         "name": "5510 SK 28/4 — İlk İşe Girişte Malül (2008/10 öncesi)",
         "dateFrom": "1976-09-08",
         "dateTo": "2008-09-30",
@@ -1457,66 +1433,6 @@
       }
     ],
     "disability": [
-      {
-        "name": "SK 28/5 %60+ (Ağır) — 2008/10 öncesi",
-        "dateFrom": "1976-09-08",
-        "dateTo": "2008-09-30",
-        "days": 3600,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": "Tarım Sigortalıları SK 28/5 %60+"
-      },
-      {
-        "name": "SK 28/5 %60+ (Ağır) — 2008/10-12",
-        "dateFrom": "2008-10-01",
-        "dateTo": "2008-12-31",
-        "days": 3700,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": "Tarım Sigortalıları SK 28/5 %60+"
-      },
-      {
-        "name": "SK 28/5 %60+ (Ağır) — 2009",
-        "dateFrom": "2009-01-01",
-        "dateTo": "2009-12-31",
-        "days": 3800,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": "Tarım Sigortalıları SK 28/5 %60+"
-      },
-      {
-        "name": "SK 28/5 %60+ (Ağır) — 2010",
-        "dateFrom": "2010-01-01",
-        "dateTo": "2010-12-31",
-        "days": 3900,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": "Tarım Sigortalıları SK 28/5 %60+"
-      },
-      {
-        "name": "SK 28/5 %60+ (Ağır) — 2011+",
-        "dateFrom": "2011-01-01",
-        "dateTo": "2099-12-31",
-        "days": 3960,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": "Tarım Sigortalıları SK 28/5 %60+"
-      },
       {
         "name": "5510 SK 28/4 — İlk İşe Girişte Malül (2008/10 öncesi)",
         "dateFrom": "1976-09-08",
