@@ -417,7 +417,9 @@
         "serviceYears": 10,
         "days": 1800,
         "degree": "%60+",
-        "note": "Bakıma muhtaç olanlarda 10 yıl hizmet şartı aranmaz"
+        "lawType": "5510",
+        "malulukType": "m25",
+        "note": "5510 M25 ile aynı şartlar — Bakıma muhtaç olanlarda 10 yıl hizmet şartı aranmaz"
       },
       {
         "name": "SK 28/5 %50-%59 — 2008-10/2008-12",
@@ -884,7 +886,9 @@
         "serviceYears": 10,
         "days": 1800,
         "degree": "%60+",
-        "note": "Bakıma muhtaç olanlarda 10 yıl hizmet şartı aranmaz"
+        "lawType": "5510",
+        "malulukType": "m25",
+        "note": "5510 M25 ile aynı şartlar — Bakıma muhtaç olanlarda 10 yıl hizmet şartı aranmaz"
       },
       {
         "name": "SK 28/5 %50-%59",
@@ -1045,34 +1049,90 @@
         "serviceYears": 15,
         "days": 3600,
         "degree": null,
+        "lawType": "5434",
         "note": "Engellikleri nedeniyle göreve alınanlar, yaş şartı aranmaz"
       },
       {
-        "name": "27.04.2005 Sonrası Engelli %50-%59",
+        "name": "5434 — Hafif Düzey (+%40, İşe Giriş Öncesi)",
         "dateFrom": "2005-04-28",
         "dateTo": "2099-12-31",
-        "serviceYears": null,
+        "serviceYears": 15,
+        "days": 5400,
+        "degree": "+%40",
+        "lawType": "5434",
+        "note": "5434 Sayılı Kanun — İşe giriş öncesi +%40 çalışma gücü kaybı"
+      },
+      {
+        "name": "5434 — Orta Düzey (%50-%59)",
+        "dateFrom": "2005-04-28",
+        "dateTo": "2099-12-31",
+        "serviceYears": 16,
         "days": 5760,
         "degree": "%50-%59",
-        "note": null
+        "lawType": "5434",
+        "note": "5434 Sayılı Kanun"
       },
       {
-        "name": "27.04.2005 Sonrası Engelli %40-%49",
+        "name": "5434 — Hafif Düzey (%40-%49)",
         "dateFrom": "2005-04-28",
         "dateTo": "2099-12-31",
-        "serviceYears": null,
+        "serviceYears": 18,
         "days": 6480,
         "degree": "%40-%49",
-        "note": null
+        "lawType": "5434",
+        "note": "5434 Sayılı Kanun"
       },
       {
-        "name": "27.04.2005 Sonrası Engelli %60+ (Maluliyet)",
+        "name": "5434 Özgü Malulen Emeklilik — Adi Malullük (657 m.105 / 5434 m.53-54)",
+        "dateFrom": "1976-09-08",
+        "dateTo": "2099-12-31",
+        "serviceYears": 10,
+        "days": 3600,
+        "degree": null,
+        "lawType": "5434",
+        "malulukType": "adiMalullük",
+        "note": "Adi Malullük: 657 m.105 hastalıkları, 5434 m.53-54 — 10 yıl hizmet, 3600 gün"
+      },
+      {
+        "name": "5510 M28/4 — Ağır Düzey (+%60)",
+        "dateFrom": "2005-04-28",
+        "dateTo": "2099-12-31",
+        "serviceYears": 15,
+        "days": 3960,
+        "degree": null,
+        "lawType": "5510",
+        "note": "5510 Sayılı Kanun M28/4 — 4/1-c (Memur)"
+      },
+      {
+        "name": "5510 M28/5 — Orta Düzey (%50-%59)",
+        "dateFrom": "2005-04-28",
+        "dateTo": "2099-12-31",
+        "serviceYears": 16,
+        "days": 4320,
+        "degree": "%50-%59",
+        "lawType": "5510",
+        "note": "5510 Sayılı Kanun M28/5 — 4/1-c (Memur)"
+      },
+      {
+        "name": "5510 M28/5 — Hafif Düzey (%40-%49)",
+        "dateFrom": "2005-04-28",
+        "dateTo": "2099-12-31",
+        "serviceYears": 18,
+        "days": 4680,
+        "degree": "%40-%49",
+        "lawType": "5510",
+        "note": "5510 Sayılı Kanun M28/5 — 4/1-c (Memur)"
+      },
+      {
+        "name": "Malulen Emeklilik — İşe Giriş Sonrası +%60 (5510 M25)",
         "dateFrom": "2005-04-28",
         "dateTo": "2099-12-31",
         "serviceYears": 10,
         "days": 1800,
-        "degree": "%60+",
-        "note": "SK 25 maluliyet: 10 yıl sigortalılık, 1800 gün, bakıma muhtaçsa 10 yıl şartı yok"
+        "degree": null,
+        "lawType": "5510",
+        "malulukType": "m25",
+        "note": "5510 M25: İşe giriş sonrası +%60 malüllük — 10 yıl/1800 gün, bakıma muhtaçsa yıl şartı aranmaz"
       }
     ]
   },
@@ -1159,7 +1219,9 @@
         "serviceYears": 10,
         "days": 1800,
         "degree": "%60+",
-        "note": "Bakıma muhtaç olanlarda 10 yıl hizmet şartı aranmaz"
+        "lawType": "5510",
+        "malulukType": "m25",
+        "note": "5510 M25 ile aynı şartlar — Bakıma muhtaç olanlarda 10 yıl hizmet şartı aranmaz"
       },
       {
         "name": "SK 28/5 %50-%59 — 2008-10/2008-12",
