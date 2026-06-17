@@ -68,37 +68,39 @@ export default function FormSection({
         {errors.statular && <p className="text-xs text-red-600 mt-1">{errors.statular}</p>}
       </div>
 
+      {/* 4c için kanun seçimi (statü seçiminin hemen altında) */}
+      {statu === '4c' && (
+        <div className="section-box bg-orange-50 border-orange-200 mb-3">
+          <p className="text-xs font-semibold text-orange-800 mb-2">
+            Hangi Kanuna Göre Değerlendirilsin?
+          </p>
+          <div className="grid grid-cols-2 gap-1">
+            {[
+              { value: '5434' as const, label: '5434 (Emekli Sandığı)' },
+              { value: '5510' as const, label: '5510 (Memur)' },
+            ].map((l) => (
+              <label key={l.value} className={`flex items-center justify-center gap-1 cursor-pointer px-2 py-1.5 rounded-lg border text-xs transition-all ${
+                lawType === l.value
+                  ? 'bg-orange-600 text-white border-orange-600 font-semibold'
+                  : 'bg-white text-gray-700 border-gray-300 hover:border-orange-400'
+              }`}>
+                <input type="radio" name="lawType" value={l.value}
+                  checked={lawType === l.value}
+                  onChange={() => onLawTypeChange?.(l.value)}
+                  className="sr-only" />
+                {l.label}
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* MALÜLÜK */}
       {statu && (
         <div className="section-box bg-purple-50 border-purple-200 mb-3">
           <p className="text-xs font-semibold text-purple-800 mb-2">
             Malüllük / Engellilik <span className="text-gray-400 font-normal">(5510 SK Md.28)</span>
           </p>
-
-          {/* 4c için kanun seçimi: 5434 (eski Emekli Sandığı) / 5510 (yeni memur) */}
-          {statu === '4c' && (
-            <div className="mb-2">
-              <p className="text-xs text-purple-700 mb-1">Hangi kanuna göre değerlendirilsin?</p>
-              <div className="grid grid-cols-2 gap-1">
-                {[
-                  { value: '5434' as const, label: '5434 (Emekli Sandığı)' },
-                  { value: '5510' as const, label: '5510 (Memur)' },
-                ].map((l) => (
-                  <label key={l.value} className={`flex items-center justify-center gap-1 cursor-pointer px-2 py-1.5 rounded-lg border text-xs transition-all ${
-                    lawType === l.value
-                      ? 'bg-purple-600 text-white border-purple-600 font-semibold'
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-purple-400'
-                  }`}>
-                    <input type="radio" name="lawType" value={l.value}
-                      checked={lawType === l.value}
-                      onChange={() => onLawTypeChange?.(l.value)}
-                      className="sr-only" />
-                    {l.label}
-                  </label>
-                ))}
-              </div>
-            </div>
-          )}
 
           {['4a', '4b', '4c', '2925'].includes(statu) ? (
             <>
@@ -222,9 +224,10 @@ export default function FormSection({
 
       {/* PRİM GÜNÜ + BORÇLANMA */}
       <div className="mb-3">
-        <label className="label">Prim Günü</label>
+        <label className="label">Prim Günü <span className="text-red-500">*</span></label>
         <input type="number" name="priGunu" value={form.priGunu || ''} onChange={onFormChange}
-          min="0" max="20000" placeholder="0" className="input-field" />
+          min="0" max="20000" placeholder="0" className={`input-field ${errors.priGunu ? 'border-red-500' : ''}`} />
+        {errors.priGunu && <p className="text-xs text-red-600 mt-0.5">{errors.priGunu}</p>}
         <div className="flex gap-3 mt-1.5">
           {[{ val: false, label: 'Borçlanma hariç' }, { val: true, label: 'Borçlanma dahil' }].map(opt => (
             <label key={String(opt.val)} className="flex items-center gap-1 cursor-pointer text-xs text-gray-600">

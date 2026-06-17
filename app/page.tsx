@@ -152,6 +152,7 @@ export default function Home() {
     if (!form.dogumTarihi) errs.dogumTarihi = 'Doğum tarihi zorunludur';
     if (!form.ilkIsGirisTarihi) errs.ilkIsGirisTarihi = 'İlk işe giriş tarihi zorunludur';
     if (form.statular.length === 0) errs.statular = 'Sigortalılık statüsü seçiniz';
+    if (form.priGunu <= 0) errs.priGunu = 'Prim günü zorunludur (0 olamaz)';
     if (form.malulBirimi === 'sk28/5' && !form.malulDerece) errs.malulDerece = 'Engelli derece seçiniz';
 
     setErrors(errs);
