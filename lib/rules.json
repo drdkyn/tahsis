@@ -649,6 +649,18 @@
         "degree": "%40-%49",
         "note": null,
         "malulukType": "sk285"
+      },
+      {
+        "name": "Md.25 — İşe giriş sonrası +%60 malüllük (malulen emeklilik)",
+        "dateFrom": "1976-09-08",
+        "dateTo": "2099-12-31",
+        "days": 1800,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 10,
+        "degree": null,
+        "malulukType": "m25",
+        "note": "İşe giriş sonrası %60+ malüllük — Bakıma muhtaçsa 0 yıl (5510 M25)"
       }
     ]
   },
@@ -1078,6 +1090,18 @@
         "degree": "%40-%49",
         "note": null,
         "malulukType": "sk285"
+      },
+      {
+        "name": "Md.25 — İşe giriş sonrası +%60 malüllük (malulen emeklilik)",
+        "dateFrom": "1976-09-08",
+        "dateTo": "2099-12-31",
+        "days": 1800,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 10,
+        "degree": null,
+        "malulukType": "m25",
+        "note": "İşe giriş sonrası %60+ malüllük — Bakıma muhtaçsa 0 yıl (5510 M25)"
       }
     ]
   },

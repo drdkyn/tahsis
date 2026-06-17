@@ -32,7 +32,6 @@ interface FormState {
   statular: string[];
   malulBirimi?: string;
   malulDerece?: string;
-  bagimaMuhtac?: boolean;
   /** Sadece 4c statüsü için: 5434 (eski Emekli Sandığı) veya 5510 (yeni memur) */
   lawType?: '5434' | '5510';
 }
@@ -66,7 +65,6 @@ export default function Home() {
     statular: [],
     malulBirimi: 'yok',
     malulDerece: '',
-    bagimaMuhtac: false,
     lawType: '5510',
   });
 
@@ -133,7 +131,6 @@ export default function Home() {
   };
 
   const handleBagimaMuhtacChange = (value: boolean) => {
-    setForm(prev => ({ ...prev, bagimaMuhtac: value }));
     setSonuclar(null);
   };
 
@@ -154,7 +151,6 @@ export default function Home() {
       statular: [],
       malulBirimi: 'yok',
       malulDerece: '',
-      bagimaMuhtac: false,
       lawType: '5510',
     });
     setSonuclar(null);
@@ -216,7 +212,6 @@ export default function Home() {
         malulukTuru,
         derece: form.malulDerece || null,
         malulTarihi: null,
-        bagimaMuhtac: form.bagimaMuhtac,
         lawType: selectedLawType,
       });
     } else {
@@ -234,7 +229,6 @@ export default function Home() {
         malulukTuru,
         derece: form.malulDerece || null,
         malulTarihi: null,
-        bagimaMuhtac: form.bagimaMuhtac,
         lawType: status === '4c' ? form.lawType : undefined,
       });
     }
@@ -299,7 +293,6 @@ export default function Home() {
               onAskerlikChange={handleAskerlikChange}
               onMalulBirimiChange={handleMalulBirimiChange}
               onMalulDereceChange={handleMalulDereceChange}
-              onBagimaMuhtacChange={handleBagimaMuhtacChange}
               onBorclanmaDahilChange={handleBorclanmaDahilChange}
               onLawTypeChange={handleLawTypeChange}
               onHesapla={handleHesapla}

@@ -14,7 +14,6 @@ export interface RetirementInput {
   malulukTuru: 'yok' | 'sk284' | 'sk285' | 'm25' | 'adiMalullük';
   derece: string | null;
   malulTarihi: Date | null;
-  bagimaMuhtac?: boolean;
   /** Sadece 4c statüsü için: hangi kanuna göre değerlendirilecek (5434 = eski Emekli Sandığı, 5510 = yeni memur). */
   lawType?: '5434' | '5510';
 }
@@ -50,7 +49,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
   const {
     status, dogumTarihi, cinsiyet, ilkGirisTarihi,
     priGunu, borçlanmaOption, borçlanmaGunu,
-    askerlikGunu, askerlikNedir, malulukTuru, derece, bagimaMuhtac, lawType,
+    askerlikGunu, askerlikNedir, malulukTuru, derece, lawType,
   } = input;
 
   const today = new Date();
@@ -159,9 +158,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
 
       // SK 28/5 — sonradan malül olma, dereceli (oran seçimine göre)
       if (malulukTuru === 'sk285' && rule.degree && derece === rule.degree && rule.malulukType !== 'm25' && rule.malulukType !== 'adiMalullük') {
-        // Bakıma muhtaç + %60+ → hizmet yılı şartı yok
-        const isBakimaMuhtac = bagimaMuhtac && rule.degree === '%60+';
-        const effectiveServiceYears = isBakimaMuhtac ? 0 : rule.serviceYears;
+        const effectiveServiceYears = rule.serviceYears;
 
         const { kosullar, uygun } = buildKosullar(rule, effectiveServiceYears);
 
@@ -173,45 +170,17 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
           basarili: derece === rule.degree,
         });
 
-        // Bakıma muhtaçlık notunu kosullara ekle
-        if (isBakimaMuhtac) {
-          kosullar.push({
-            ad: 'Bakıma Muhtaçlık',
-            gerekli: 'Rapor ile belgelenmiş',
-            sahip: 'Evet',
-            basarili: true,
-          });
-        }
-
-        const notlar = isBakimaMuhtac
-          ? 'Bakıma muhtaç olduğunuz için 10 yıl hizmet yılı şartı aranmaz. Durumunuz sağlık kurulu raporu ile belgelenmelidir.'
-          : rule.note;
-
-        results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar });
+        results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar: rule.note });
         break; // İlk uygun SK 28/5 kuralı
       }
 
       // 5510 M25 — işe giriş sonrası +%60 malüllük
       if (malulukTuru === 'm25' && rule.malulukType === 'm25') {
-        const isBakimaMuhtac = bagimaMuhtac;
-        const effectiveServiceYears = isBakimaMuhtac ? 0 : rule.serviceYears;
+        const effectiveServiceYears = rule.serviceYears;
 
         const { kosullar, uygun } = buildKosullar(rule, effectiveServiceYears);
 
-        if (isBakimaMuhtac) {
-          kosullar.push({
-            ad: 'Bakıma Muhtaçlık',
-            gerekli: 'Rapor ile belgelenmiş',
-            sahip: 'Evet',
-            basarili: true,
-          });
-        }
-
-        const notlar = isBakimaMuhtac
-          ? 'Bakıma muhtaç olduğunuz için 10 yıl hizmet yılı şartı aranmaz. Durumunuz sağlık kurulu raporu ile belgelenmelidir.'
-          : rule.note;
-
-        results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar });
+        results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar: rule.note });
         break; // İlk uygun M25 kuralı
       }
 

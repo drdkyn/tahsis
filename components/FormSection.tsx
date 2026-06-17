@@ -12,7 +12,6 @@ interface FormSectionProps {
     statular: string[];
     malulBirimi?: string;
     malulDerece?: string;
-    bagimaMuhtac?: boolean;
     lawType?: '5434' | '5510';
   };
   hesaplananIlkIsGirisTarihi?: string;
@@ -22,7 +21,6 @@ interface FormSectionProps {
   onAskerlikChange: (nedir: 'once' | 'sonra') => void;
   onMalulBirimiChange: (birim: string) => void;
   onMalulDereceChange?: (derece: string) => void;
-  onBagimaMuhtacChange?: (value: boolean) => void;
   onBorclanmaDahilChange: (dahil: boolean) => void;
   onLawTypeChange?: (lawType: '5434' | '5510') => void;
   onHesapla: () => void;
@@ -33,7 +31,7 @@ export default function FormSection({
   form, hesaplananIlkIsGirisTarihi, errors,
   onFormChange, onCheckbox, onAskerlikChange,
   onMalulBirimiChange, onMalulDereceChange,
-  onBagimaMuhtacChange, onBorclanmaDahilChange, onLawTypeChange, onHesapla, onTemizle,
+  onBorclanmaDahilChange, onLawTypeChange, onHesapla, onTemizle,
 }: FormSectionProps) {
   const statu = form.statular[0];
   const lawType = form.lawType || '5510';
@@ -158,20 +156,6 @@ export default function FormSection({
                     )}
                   </select>
                   {errors.malulDerece && <p className="text-xs text-red-600">{errors.malulDerece}</p>}
-
-                  {form.malulDerece === '%60+' && statu === '4c' && (
-                    <label className="flex items-start gap-2 cursor-pointer p-2 bg-red-50 border border-red-200 rounded-lg">
-                      <input type="checkbox" checked={form.bagimaMuhtac || false}
-                        onChange={(e) => onBagimaMuhtacChange?.(e.target.checked)}
-                        className="w-3.5 h-3.5 mt-0.5 text-red-600 shrink-0" />
-                      <span className="text-xs text-gray-700">
-                        <strong>Bakıma muhtaç</strong>
-                        <span className="block text-gray-500 mt-0.5">
-                          Başkasının yardımına muhtaç olduğunuz sağlık kurulu raporu ile belirlenmişse — 10 yıl hizmet şartı aranmaz
-                        </span>
-                      </span>
-                    </label>
-                  )}
                 </div>
               )}
 
@@ -195,19 +179,6 @@ export default function FormSection({
                 </div>
               )}
 
-              {form.malulBirimi === 'm25' && (
-                <label className="flex items-start gap-2 cursor-pointer p-2 bg-red-50 border border-red-200 rounded-lg mt-2">
-                  <input type="checkbox" checked={form.bagimaMuhtac || false}
-                    onChange={(e) => onBagimaMuhtacChange?.(e.target.checked)}
-                    className="w-3.5 h-3.5 mt-0.5 text-red-600 shrink-0" />
-                  <span className="text-xs text-gray-700">
-                    <strong>Bakıma muhtaç</strong>
-                    <span className="block text-gray-500 mt-0.5">
-                      Başkasının yardımına muhtaç olduğunuz sağlık kurulu raporu ile belirlenmişse — 10 yıl hizmet şartı aranmaz
-                    </span>
-                  </span>
-                </label>
-              )}
             </>
           ) : null}
         </div>
