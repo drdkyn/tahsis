@@ -158,6 +158,14 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
 
         const { kosullar, uygun } = buildKosullar(rule, effectiveServiceYears);
 
+        // Engel Derecesi koşulunu ekle
+        kosullar.push({
+          ad: 'Engel Derecesi',
+          gerekli: rule.degree,
+          sahip: derece || 'Seçilmedi',
+          basarili: derece === rule.degree,
+        });
+
         // Bakıma muhtaçlık notunu kosullara ekle
         if (isBakimaMuhtac) {
           kosullar.push({
