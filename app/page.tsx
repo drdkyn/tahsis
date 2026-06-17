@@ -99,6 +99,25 @@ export default function Home() {
   const handleBorclanmaDahilChange = (dahil: boolean) =>
     setForm(prev => ({ ...prev, borçlanmaDahil: dahil }));
 
+  const handleTemizle = () => {
+    setForm({
+      dogumTarihi: '',
+      cinsiyet: 'erkek',
+      ilkIsGirisTarihi: '',
+      priGunu: 0,
+      borçlanmaDahil: false,
+      askerlikBorclanlmasi: 0,
+      askerlikNedir: 'sonra',
+      statular: [],
+      malulBirimi: 'yok',
+      malulDerece: '',
+      bagimaMuhtac: false,
+    });
+    setSonuclar(null);
+    setOzet(null);
+    setErrors({});
+  };
+
   const handleHesapla = () => {
     const errs: Record<string, string> = {};
     if (!form.dogumTarihi) errs.dogumTarihi = 'Doğum tarihi zorunludur';
@@ -196,6 +215,7 @@ export default function Home() {
               onBagimaMuhtacChange={handleBagimaMuhtacChange}
               onBorclanmaDahilChange={handleBorclanmaDahilChange}
               onHesapla={handleHesapla}
+              onTemizle={handleTemizle}
             />
           </div>
 

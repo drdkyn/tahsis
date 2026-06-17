@@ -24,13 +24,14 @@ interface FormSectionProps {
   onBagimaMuhtacChange?: (value: boolean) => void;
   onBorclanmaDahilChange: (dahil: boolean) => void;
   onHesapla: () => void;
+  onTemizle: () => void;
 }
 
 export default function FormSection({
   form, hesaplananIlkIsGirisTarihi, errors,
   onFormChange, onCheckbox, onAskerlikChange,
   onMalulBirimiChange, onMalulDereceChange,
-  onBagimaMuhtacChange, onBorclanmaDahilChange, onHesapla,
+  onBagimaMuhtacChange, onBorclanmaDahilChange, onHesapla, onTemizle,
 }: FormSectionProps) {
   const statu = form.statular[0];
 
@@ -187,11 +188,17 @@ export default function FormSection({
         </div>
       </div>
 
-      {/* HESAPLA */}
-      <button onClick={onHesapla}
-        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2.5 rounded-lg transition-all shadow-md text-sm">
-        Hesapla →
-      </button>
+      {/* HESAPLA + TEMİZLE */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+        <button onClick={onHesapla}
+          className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2.5 rounded-lg transition-all shadow-md text-sm">
+          Hesapla →
+        </button>
+        <button onClick={onTemizle}
+          className="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2.5 rounded-lg transition-all shadow-md text-sm">
+          Temizle ✕
+        </button>
+      </div>
     </div>
   );
 }
