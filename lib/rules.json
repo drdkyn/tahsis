@@ -5,10 +5,10 @@
         "name": "Normal Emeklilik — 08.09.1999 Öncesi (EYT)",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
-        "serviceYears": 25,
         "days": 5000,
-        "ageWoman": 58,
-        "ageMan": 60
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 25
       },
       {
         "name": "Normal Emeklilik — 09.09.1999-30.04.2008",
@@ -94,7 +94,7 @@
     ],
     "age": [
       {
-        "name": "Yaşlılık (Kısmi) — 08.09.1999 Öncesi",
+        "name": "Yaşlılık (Kısmi) — 08.09.1999 Öncesi / 23.05.2002 öncesi dolduranlar",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 15,
@@ -211,8 +211,17 @@
         "ageMan": 65
       },
       {
-        "name": "Yaşlılık (Kısmi) — 01.01.2040+",
+        "name": "Yaşlılık (Kısmi) — 01.01.2040-31.12.2041",
         "dateFrom": "2040-01-01",
+        "dateTo": "2041-12-31",
+        "serviceYears": null,
+        "days": 5400,
+        "ageWoman": 64,
+        "ageMan": 65
+      },
+      {
+        "name": "Yaşlılık (Kısmi) — 01.01.2042+",
+        "dateFrom": "2042-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
         "days": 5400,
@@ -478,8 +487,26 @@
         "ageMan": 64
       },
       {
-        "name": "Normal Emeklilik — 01.01.2044+",
+        "name": "Normal Emeklilik — 01.01.2044-31.12.2045",
         "dateFrom": "2044-01-01",
+        "dateTo": "2045-12-31",
+        "serviceYears": null,
+        "days": 9000,
+        "ageWoman": 63,
+        "ageMan": 65
+      },
+      {
+        "name": "Normal Emeklilik — 01.01.2046-31.12.2047",
+        "dateFrom": "2046-01-01",
+        "dateTo": "2047-12-31",
+        "serviceYears": null,
+        "days": 9000,
+        "ageWoman": 64,
+        "ageMan": 65
+      },
+      {
+        "name": "Normal Emeklilik — 01.01.2048+",
+        "dateFrom": "2048-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
         "days": 9000,
@@ -534,8 +561,17 @@
         "ageMan": 65
       },
       {
-        "name": "Yaşlılık (Kısmi) — 01.01.2040+",
+        "name": "Yaşlılık (Kısmi) — 01.01.2040-31.12.2041",
         "dateFrom": "2040-01-01",
+        "dateTo": "2041-12-31",
+        "serviceYears": null,
+        "days": 5400,
+        "ageWoman": 64,
+        "ageMan": 65
+      },
+      {
+        "name": "Yaşlılık (Kısmi) — 01.01.2042+",
+        "dateFrom": "2042-01-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
         "days": 5400,
@@ -560,7 +596,7 @@
         "serviceYears": 10,
         "days": 1800,
         "degree": "%60+",
-        "note": "Bakıma muhtaç olanlarda 10 yıl şartı aranmaz"
+        "note": "Bakıma muhtaç olanlarda 10 yıl hizmet şartı aranmaz"
       },
       {
         "name": "SK 28/5 %50-%59",
@@ -748,14 +784,14 @@
         "serviceYears": 10,
         "days": 1800,
         "degree": "%60+",
-        "note": "Ağır engel: SK 25 maluliyet şartları, 10 yıl sigortalılık ve 1800 gün"
+        "note": "SK 25 maluliyet: 10 yıl sigortalılık, 1800 gün, bakıma muhtaçsa 10 yıl şartı yok"
       }
     ]
   },
   "2925": {
     "normal": [
       {
-        "name": "Normal Emeklilik — 08.09.1999 Öncesi",
+        "name": "Normal Emeklilik — 08.09.1999 Öncesi (EYT)",
         "dateFrom": "1976-09-08",
         "dateTo": "1999-09-08",
         "serviceYears": 15,
@@ -777,7 +813,7 @@
         "dateFrom": "2008-05-01",
         "dateTo": "2099-12-31",
         "serviceYears": null,
-        "days": 3600,
+        "days": 7200,
         "ageWoman": 58,
         "ageMan": 60
       }
