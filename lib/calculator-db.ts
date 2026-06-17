@@ -151,7 +151,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
       }
 
       // SK 28/5 — sonradan malül olma, dereceli (oran seçimine göre)
-      if (malulukTuru === 'sk285' && rule.degree && derece === rule.degree && rule.malulukType !== 'm25') {
+      if (malulukTuru === 'sk285' && rule.degree && derece === rule.degree && rule.malulukType !== 'm25' && rule.malulukType !== 'adiMalullük') {
         // Bakıma muhtaç + %60+ → hizmet yılı şartı yok
         const isBakimaMuhtac = bagimaMuhtac && rule.degree === '%60+';
         const effectiveServiceYears = isBakimaMuhtac ? 0 : rule.serviceYears;

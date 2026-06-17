@@ -109,6 +109,7 @@ export default function Home() {
   const handleMalulBirimiChange = (birim: string) => {
     setForm(prev => ({ ...prev, malulBirimi: birim, malulDerece: '' }));
     setSonuclar(null);
+    // Malülük seçimi değişince derece otomatik reset yapılır, hesapla tetiklensin diye
   };
 
   const handleMalulDereceChange = (derece: string) => {
