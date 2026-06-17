@@ -33,6 +33,8 @@ interface FormState {
   malulBirimi?: string;
   malulDerece?: string;
   bagimaMuhtac?: boolean;
+  /** Sadece 4c statüsü için: 5434 (eski Emekli Sandığı) veya 5510 (yeni memur) */
+  lawType?: '5434' | '5510';
 }
 
 function parseDate(str: string): Date {
@@ -57,6 +59,7 @@ export default function Home() {
     malulBirimi: 'yok',
     malulDerece: '',
     bagimaMuhtac: false,
+    lawType: '5510',
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -81,11 +84,19 @@ export default function Home() {
   };
 
   const handleCheckbox = (statu: string) => {
-    setForm(prev => ({ ...prev, statular: [statu], malulBirimi: 'yok', malulDerece: '' }));
+    // ÖNEMLİ: Statü değiştirildiğinde malüllük seçimini SIFIRLAMIYORUZ.
+    // Önceden burada malulBirimi/malulDerece 'yok'/'' olarak resetleniyordu;
+    // bu da kullanıcı bir statüde oran seçip başka bir statüyü denediğinde
+    // malüllük hesaplamasının sessizce devre dışı kalmasına ve sonuç
+    // ekranında disability kartının hiç görünmemesine sebep oluyordu.
+    setForm(prev => ({ ...prev, statular: [statu] }));
   };
 
   const handleAskerlikChange = (nedir: 'once' | 'sonra') =>
     setForm(prev => ({ ...prev, askerlikNedir: nedir }));
+
+  const handleLawTypeChange = (lawType: '5434' | '5510') =>
+    setForm(prev => ({ ...prev, lawType, malulBirimi: 'yok', malulDerece: '' }));
 
   const handleMalulBirimiChange = (birim: string) =>
     setForm(prev => ({ ...prev, malulBirimi: birim, malulDerece: '' }));
@@ -112,6 +123,7 @@ export default function Home() {
       malulBirimi: 'yok',
       malulDerece: '',
       bagimaMuhtac: false,
+      lawType: '5510',
     });
     setSonuclar(null);
     setOzet(null);
@@ -132,8 +144,12 @@ export default function Home() {
     const ilkGirisTarihi = parseDate(form.ilkIsGirisTarihi);
     const status = form.statular[0] as '4a' | '4b' | '4c' | '2925';
 
-    const malulMap: Record<string, 'yok' | 'sk284' | 'sk285'> = {
-      'yok': 'yok', 'sk28/4': 'sk284', 'sk28/5': 'sk285',
+    const malulMap: Record<string, 'yok' | 'sk284' | 'sk285' | 'm25' | 'adiMalullük'> = {
+      'yok': 'yok',
+      'sk28/4': 'sk284',
+      'sk28/5': 'sk285',
+      'm25': 'm25',
+      'adiMalullük': 'adiMalullük',
     };
     const malulukTuru = malulMap[form.malulBirimi || 'yok'] || 'yok';
 
@@ -150,6 +166,8 @@ export default function Home() {
       malulukTuru,
       derece: form.malulDerece || null,
       malulTarihi: null,
+      bagimaMuhtac: form.bagimaMuhtac,
+      lawType: status === '4c' ? form.lawType : undefined,
     });
 
     const today = new Date();
@@ -214,6 +232,7 @@ export default function Home() {
               onMalulDereceChange={handleMalulDereceChange}
               onBagimaMuhtacChange={handleBagimaMuhtacChange}
               onBorclanmaDahilChange={handleBorclanmaDahilChange}
+              onLawTypeChange={handleLawTypeChange}
               onHesapla={handleHesapla}
               onTemizle={handleTemizle}
             />
