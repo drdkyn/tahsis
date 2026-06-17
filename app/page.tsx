@@ -170,11 +170,12 @@ export default function Home() {
     const malulukTuru = malulMap[form.malulBirimi || 'yok'] || 'yok';
 
     // ÖNEMLİ: 4c statüsünde malülük seçilmişse, TARAFINDAN her iki lawType (5434 ve 5510) için
-    // hesaplama yap ve sonuçları birleştir. Böylece kullanıcı tüm seçenekleri görür.
+    // SADECE disability kurallarını hesapla (çünkü normal/age kuralları aynı). 
+    // Normal ve age kurallarını ise sadece bir kez hesapla.
     let results: HesapSonucu[] = [];
     
     if (status === '4c' && malulukTuru !== 'yok') {
-      // 4c/5434 kombinasyonu
+      // 4c/5434 kombinasyonu - tüm kurallar
       const results5434 = calculateRetirementOptionsDB({
         status,
         dogumTarihi,
@@ -192,7 +193,7 @@ export default function Home() {
         lawType: '5434',
       });
       
-      // 4c/5510 kombinasyonu
+      // 4c/5510 kombinasyonu - tüm kurallar
       const results5510 = calculateRetirementOptionsDB({
         status,
         dogumTarihi,
@@ -210,8 +211,15 @@ export default function Home() {
         lawType: '5510',
       });
       
-      // Sonuçları birleştir: disability tipindekiler + normal + age (5434'ten), sonra 5510'dan da ekle
-      results = [...results5434, ...results5510];
+      // Sonuçları birleştir: 
+      // - Normal ve age kuralları 5434'ten (aynı, duplicate'i engelle)
+      // - Disability kuralları her iki kanundan (farklı olabilir)
+      const disability5434 = results5434.filter(r => r.type === 'disability');
+      const disability5510 = results5510.filter(r => r.type === 'disability');
+      const normal = results5434.filter(r => r.type === 'normal');
+      const age = results5434.filter(r => r.type === 'age');
+      
+      results = [...disability5434, ...disability5510, ...normal, ...age];
     } else {
       // 4c değil veya malülük seçilmemişse normal şekilde hesapla
       results = calculateRetirementOptionsDB({
