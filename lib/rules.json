@@ -1131,7 +1131,7 @@
         "dateTo": "2005-04-27",
         "serviceYears": 15,
         "days": 3600,
-        "degree": null,
+        "degree": "%60+",
         "lawType": "5434",
         "note": "Engellikleri nedeniyle göreve alınanlar, yaş şartı aranmaz",
         "malulukType": "sk284"
@@ -1208,7 +1208,7 @@
         "dateTo": "2099-12-31",
         "serviceYears": 15,
         "days": 3960,
-        "degree": null,
+        "degree": "%60+",
         "lawType": "5510",
         "note": "5510 Sayılı Kanun M28/4 — 4/1-c (Memur)",
         "malulukType": "sk284"

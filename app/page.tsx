@@ -117,9 +117,14 @@ export default function Home() {
   };
 
   const handleMalulBirimiChange = (birim: string) => {
-    setForm(prev => ({ ...prev, malulBirimi: birim, malulDerece: '' }));
+    // SK 28/4-40 seçilince derece otomatik "+%40" olarak set et
+    // SK 28/4 seçilince derece otomatik "%60+" olarak set et
+    let derece = '';
+    if (birim === 'sk28/4-40') derece = '+%40';
+    else if (birim === 'sk28/4') derece = '%60+';
+    
+    setForm(prev => ({ ...prev, malulBirimi: birim, malulDerece: derece }));
     setSonuclar(null);
-    // Malülük seçimi değişince derece otomatik reset yapılır, hesapla tetiklensin diye
   };
 
   const handleMalulDereceChange = (derece: string) => {

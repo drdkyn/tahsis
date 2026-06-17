@@ -176,6 +176,26 @@ export default function FormSection({
                 </div>
               )}
 
+              {/* SK 28/4 (%60+) seçilince derece dropdown açılır */}
+              {form.malulBirimi === 'sk28/4' && (
+                <div className="mt-2 space-y-2">
+                  <select value={form.malulDerece || '%60+'} onChange={(e) => onMalulDereceChange?.(e.target.value)}
+                    className="input-field" disabled>
+                    <option value="%60+">%60+ (Ağır) — Sabit</option>
+                  </select>
+                </div>
+              )}
+
+              {/* SK 28/4-40 (+%40) seçilince derece dropdown açılır */}
+              {form.malulBirimi === 'sk28/4-40' && (
+                <div className="mt-2 space-y-2">
+                  <select value={form.malulDerece || '+%40'} onChange={(e) => onMalulDereceChange?.(e.target.value)}
+                    className="input-field" disabled>
+                    <option value="+%40">+%40 (Hafif) — Sabit</option>
+                  </select>
+                </div>
+              )}
+
               {form.malulBirimi === 'm25' && (
                 <label className="flex items-start gap-2 cursor-pointer p-2 bg-red-50 border border-red-200 rounded-lg mt-2">
                   <input type="checkbox" checked={form.bagimaMuhtac || false}

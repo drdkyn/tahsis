@@ -143,11 +143,18 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
     for (const rule of disabilityRules) {
       if (!isGecerli(rule)) continue;
 
-      // SK 28/4 — işe başlamadan/girişte malül olma (yaşsız, derece şartı yok)
-      if (malulukTuru === 'sk284' && rule.degree === null && rule.malulukType !== 'm25' && rule.malulukType !== 'adiMalullük') {
+      // SK 28/4 — işe başlamadan/girişte malül olma (%60+ çalışma gücü kaybı)
+      if (malulukTuru === 'sk284' && (rule.degree === '%60+' || (rule.degree === null && derece !== '+%40')) && rule.malulukType !== 'm25' && rule.malulukType !== 'adiMalullük') {
         const { kosullar, uygun } = buildKosullar(rule);
         results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar: rule.note });
-        break; // İlk uygun SK 28/4 kuralı
+        break; // İlk uygun SK 28/4 (%60+) kuralı
+      }
+
+      // SK 28/4-40 — işe başlamadan engelli olma (+%40 çalışma gücü kaybı)
+      if (malulukTuru === 'sk284' && rule.degree === '+%40' && rule.malulukType !== 'm25' && rule.malulukType !== 'adiMalullük') {
+        const { kosullar, uygun } = buildKosullar(rule);
+        results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar: rule.note });
+        break; // İlk uygun SK 28/4-40 (+%40) kuralı
       }
 
       // SK 28/5 — sonradan malül olma, dereceli (oran seçimine göre)
