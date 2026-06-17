@@ -1347,42 +1347,6 @@
         "note": "5510 M25: İşe giriş sonrası +%60 malüllük — 10 yıl/1800 gün, bakıma muhtaçsa yıl şartı aranmaz"
       },
       {
-        "name": "5434 — SK 28/5 %60+ (Ağır) — 1988-2003",
-        "dateFrom": "1988-06-19",
-        "dateTo": "2003-12-31",
-        "days": 0,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%60+",
-        "malulukType": "sk285",
-        "note": "5434 — 1988-2003 arası işe girenler için 15 yıl hizmet şartı"
-      },
-      {
-        "name": "5434 — SK 28/5 %50-%59 (Orta) — 1988-2003",
-        "dateFrom": "1988-06-19",
-        "dateTo": "2003-12-31",
-        "days": 0,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%50-%59",
-        "malulukType": "sk285",
-        "note": "5434 — 1988-2003 arası işe girenler için 15 yıl hizmet şartı"
-      },
-      {
-        "name": "5434 — SK 28/5 %40-%49 (Hafif) — 1988-2003",
-        "dateFrom": "1988-06-19",
-        "dateTo": "2003-12-31",
-        "days": 0,
-        "ageWoman": null,
-        "ageMan": null,
-        "serviceYears": 15,
-        "degree": "%40-%49",
-        "malulukType": "sk285",
-        "note": "5434 — 1988-2003 arası işe girenler için 15 yıl hizmet şartı"
-      },
-      {
         "name": "SK 28/5 %60+ (Ağır) — 2004-2008 (4c)",
         "dateFrom": "2004-01-01",
         "dateTo": "2008-09-30",
@@ -1459,6 +1423,42 @@
         "lawType": "5510",
         "note": "5510 Sayılı Kanun M28/5 — 4/1-c (Memur)",
         "malulukType": "sk285"
+      },
+      {
+        "name": "5434 — SK 28/5 %60+ (Ağır) — 1988-2003",
+        "dateFrom": "1988-06-19",
+        "dateTo": "2003-12-31",
+        "days": 0,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 15,
+        "degree": "%60+",
+        "malulukType": "sk285",
+        "note": "5434 — 1988-2003: 15 yıl (gün yok, yaş yok)"
+      },
+      {
+        "name": "5434 — SK 28/5 %50-%59 (Orta) — 1988-2003",
+        "dateFrom": "1988-06-19",
+        "dateTo": "2003-12-31",
+        "days": 5760,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 15,
+        "degree": "%50-%59",
+        "malulukType": "sk285",
+        "note": "5434 — 1988-2003: 15 yıl + 5760 gün"
+      },
+      {
+        "name": "5434 — SK 28/5 %40-%49 (Hafif) — 1988-2003",
+        "dateFrom": "1988-06-19",
+        "dateTo": "2003-12-31",
+        "days": 6480,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 15,
+        "degree": "%40-%49",
+        "malulukType": "sk285",
+        "note": "5434 — 1988-2003: 15 yıl + 6480 gün"
       }
     ]
   },
