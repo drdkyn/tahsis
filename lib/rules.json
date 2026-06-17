@@ -375,6 +375,24 @@
         "note": "Son 3,5 yıl ve 1260 gün şartı aranır"
       },
       {
+        "name": "SK 28/5 %50–%59 — 2004-2008 (4a)",
+        "dateFrom": "2004-01-01",
+        "dateTo": "2008-09-30",
+        "serviceYears": 16,
+        "days": 4320,
+        "degree": "%50-%59",
+        "note": null
+      },
+      {
+        "name": "SK 28/5 %40–%49 — 2004-2008 (4a)",
+        "dateFrom": "2004-01-01",
+        "dateTo": "2008-09-30",
+        "serviceYears": 18,
+        "days": 4680,
+        "degree": "%40-%49",
+        "note": null
+      },
+      {
         "name": "SK 28/4 — 2008/Ekim-Aralık",
         "dateFrom": "2008-10-01",
         "dateTo": "2008-12-31",
@@ -878,6 +896,24 @@
         "days": 3960,
         "degree": null,
         "note": "Son 3,5 yıl ve 1260 gün şartı aranır"
+      },
+      {
+        "name": "SK 28/5 %50–%59 — 2004-2008 (4b)",
+        "dateFrom": "2004-01-01",
+        "dateTo": "2008-09-30",
+        "serviceYears": 16,
+        "days": 4320,
+        "degree": "%50-%59",
+        "note": null
+      },
+      {
+        "name": "SK 28/5 %40–%49 — 2004-2008 (4b)",
+        "dateFrom": "2004-01-01",
+        "dateTo": "2008-09-30",
+        "serviceYears": 18,
+        "days": 4680,
+        "degree": "%40-%49",
+        "note": null
       },
       {
         "name": "SK 28/5 %60+ (Ağır)",

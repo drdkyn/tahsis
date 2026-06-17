@@ -86,13 +86,15 @@ export default function Home() {
   };
 
   const handleCheckbox = (statu: string) => {
-    // ÖNEMLİ: Statü değiştirildiğinde malüllük seçimini SIFIRLAMIYORUZ.
-    // Önceden burada malulBirimi/malulDerece 'yok'/'' olarak resetleniyordu;
-    // bu da kullanıcı bir statüde oran seçip başka bir statüyü denediğinde
-    // malüllük hesaplamasının sessizce devre dışı kalmasına ve sonuç
-    // ekranında disability kartının hiç görünmemesine sebep oluyordu.
-    // ANCAK: Statü değiştiğinde sonuçları temizlemeli, ki eski hesaplama gösterilmesin
-    setForm(prev => ({ ...prev, statular: [statu] }));
+    // Statü değiştiğinde malülük seçimini reset et (sekmeler arası geçişte eski veri kalmasın)
+    // lawType de reset et (4a, 4b, 2925'de lawType yoktur, sadece 4c'de vardır)
+    setForm(prev => ({ 
+      ...prev, 
+      statular: [statu],
+      malulBirimi: 'yok',     // ← Malülük reset
+      malulDerece: '',        // ← Derece reset
+      lawType: '5510',        // ← lawType reset (4c'de varsayılan 5510)
+    }));
     setSonuclar(null);
   };
 
