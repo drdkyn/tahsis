@@ -135,6 +135,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
       if (malulukTuru === 'sk284' && rule.degree === null) {
         const { kosullar, uygun } = buildKosullar(rule);
         results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar: rule.note });
+        break; // İlk uygun SK 28/4 kuralı
       }
 
       if (malulukTuru === 'sk285' && rule.degree && derece === rule.degree) {
@@ -159,6 +160,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
           : rule.note;
 
         results.push({ name: rule.name, type: 'disability', uygun, kosullar, notlar });
+        break; // İlk uygun SK 28/5 kuralı
       }
     }
   }
