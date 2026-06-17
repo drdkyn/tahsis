@@ -96,9 +96,10 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
   // ---- NORMAL ----
   if (statusRules.normal) {
     for (const rule of statusRules.normal) {
-      if (!isGecerli(rule)) continue; // sadece geçerlileri al
+      if (!isGecerli(rule)) continue;
       const { kosullar, uygun } = buildKosullar(rule);
       results.push({ name: rule.name, type: 'normal', uygun, kosullar });
+      break; // giriş tarihine uyan ilk kural
     }
   }
 
@@ -108,6 +109,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
       if (!isGecerli(rule)) continue;
       const { kosullar, uygun } = buildKosullar(rule);
       results.push({ name: rule.name, type: 'age', uygun, kosullar });
+      break; // giriş tarihine uyan ilk kural
     }
   }
 
