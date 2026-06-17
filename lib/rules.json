@@ -1325,6 +1325,64 @@
         "malulukType": "sk284"
       },
       {
+        "name": "5434 Özgü Malulen Emeklilik — Adi Malullük (657 m.105 / 5434 m.53-54)",
+        "dateFrom": "1976-09-08",
+        "dateTo": "2099-12-31",
+        "serviceYears": 10,
+        "days": 3600,
+        "degree": null,
+        "lawType": "5434",
+        "malulukType": "adiMalullük",
+        "note": "Adi Malullük: 657 m.105 hastalıkları, 5434 m.53-54 — 10 yıl hizmet, 3600 gün"
+      },
+      {
+        "name": "Malulen Emeklilik — İşe Giriş Sonrası +%60 (5510 M25)",
+        "dateFrom": "2005-04-28",
+        "dateTo": "2099-12-31",
+        "serviceYears": 10,
+        "days": 1800,
+        "degree": null,
+        "lawType": "5510",
+        "malulukType": "m25",
+        "note": "5510 M25: İşe giriş sonrası +%60 malüllük — 10 yıl/1800 gün, bakıma muhtaçsa yıl şartı aranmaz"
+      },
+      {
+        "name": "5434 — SK 28/5 %60+ (Ağır) — 1988-2003",
+        "dateFrom": "1988-06-19",
+        "dateTo": "2003-12-31",
+        "days": 0,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 15,
+        "degree": "%60+",
+        "malulukType": "sk285",
+        "note": "5434 — 1988-2003 arası işe girenler için 15 yıl hizmet şartı"
+      },
+      {
+        "name": "5434 — SK 28/5 %50-%59 (Orta) — 1988-2003",
+        "dateFrom": "1988-06-19",
+        "dateTo": "2003-12-31",
+        "days": 0,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 15,
+        "degree": "%50-%59",
+        "malulukType": "sk285",
+        "note": "5434 — 1988-2003 arası işe girenler için 15 yıl hizmet şartı"
+      },
+      {
+        "name": "5434 — SK 28/5 %40-%49 (Hafif) — 1988-2003",
+        "dateFrom": "1988-06-19",
+        "dateTo": "2003-12-31",
+        "days": 0,
+        "ageWoman": null,
+        "ageMan": null,
+        "serviceYears": 15,
+        "degree": "%40-%49",
+        "malulukType": "sk285",
+        "note": "5434 — 1988-2003 arası işe girenler için 15 yıl hizmet şartı"
+      },
+      {
         "name": "SK 28/5 %60+ (Ağır) — 2004-2008 (4c)",
         "dateFrom": "2004-01-01",
         "dateTo": "2008-09-30",
@@ -1381,17 +1439,6 @@
         "malulukType": "sk285"
       },
       {
-        "name": "5434 Özgü Malulen Emeklilik — Adi Malullük (657 m.105 / 5434 m.53-54)",
-        "dateFrom": "1976-09-08",
-        "dateTo": "2099-12-31",
-        "serviceYears": 10,
-        "days": 3600,
-        "degree": null,
-        "lawType": "5434",
-        "malulukType": "adiMalullük",
-        "note": "Adi Malullük: 657 m.105 hastalıkları, 5434 m.53-54 — 10 yıl hizmet, 3600 gün"
-      },
-      {
         "name": "5510 M28/5 — Orta Düzey (%50-%59)",
         "dateFrom": "2005-04-28",
         "dateTo": "2099-12-31",
@@ -1412,17 +1459,6 @@
         "lawType": "5510",
         "note": "5510 Sayılı Kanun M28/5 — 4/1-c (Memur)",
         "malulukType": "sk285"
-      },
-      {
-        "name": "Malulen Emeklilik — İşe Giriş Sonrası +%60 (5510 M25)",
-        "dateFrom": "2005-04-28",
-        "dateTo": "2099-12-31",
-        "serviceYears": 10,
-        "days": 1800,
-        "degree": null,
-        "lawType": "5510",
-        "malulukType": "m25",
-        "note": "5510 M25: İşe giriş sonrası +%60 malüllük — 10 yıl/1800 gün, bakıma muhtaçsa yıl şartı aranmaz"
       }
     ]
   },
