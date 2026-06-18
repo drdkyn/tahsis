@@ -64,7 +64,26 @@ export default function FormSection({
         {errors.statular && <p className="text-xs text-red-600 mt-1">{errors.statular}</p>}
       </div>
 
-      {/* 4c için kanun seçimi (statü seçiminin hemen altında) */}
+      {/* 4/a MALÜLLÜK DROPDOWN - STATÜ SEÇİMİNİN HEMEN ALTINDA */}
+      {statu === '4a' && (
+        <div className="section-box bg-purple-50 border-purple-200 mb-3">
+          <label className="label">Malüllük/Engellilik Türü</label>
+          <select 
+            value={disabilityType || ''}
+            onChange={(e) => onDisabilityTypeChange?.(e.target.value as any || undefined)}
+            className="input-field"
+          >
+            <option value="">— Seçilmedi —</option>
+            <option value="before_60">%60 ve Üzeri (İşe Başlamadan Önce)</option>
+            <option value="after_60">%60 ve Üzeri (İşe Başladıktan Sonra)</option>
+            <option value="disability_50_59">%50-%59 Arası</option>
+            <option value="disability_40_49">%40-%49 Arası</option>
+          </select>
+          <p className="text-xs text-gray-500 mt-1.5">
+            Malüllük derecesine göre seçiniz. Boş bırakırsanız sadece normal emeklilik kuralları hesaplanır.
+          </p>
+        </div>
+      )}
 
       {/* KİŞİSEL BİLGİLER */}
       <div className="grid grid-cols-2 gap-2 mb-3">
@@ -242,27 +261,6 @@ export default function FormSection({
           ))}
         </div>
       </div>
-
-      {/* 4/a MALÜLLÜK DROPDOWN */}
-      {statu === '4a' && (
-        <div className="section-box bg-purple-50 border-purple-200 mb-3">
-          <label className="label">Malüllük/Engellilik Türü</label>
-          <select 
-            value={disabilityType || ''}
-            onChange={(e) => onDisabilityTypeChange?.(e.target.value as any || undefined)}
-            className="input-field"
-          >
-            <option value="">— Seçilmedi —</option>
-            <option value="before_60">%60 ve Üzeri (İşe Başlamadan Önce)</option>
-            <option value="after_60">%60 ve Üzeri (İşe Başladıktan Sonra)</option>
-            <option value="disability_50_59">%50-%59 Arası</option>
-            <option value="disability_40_49">%40-%49 Arası</option>
-          </select>
-          <p className="text-xs text-gray-500 mt-1.5">
-            Malüllük derecesine göre seçiniz. Boş bırakırsanız sadece normal emeklilik kuralları hesaplanır.
-          </p>
-        </div>
-      )}
 
       {/* ASKERLİK */}
       <div className="section-box bg-blue-50 border-blue-200 mb-3">
