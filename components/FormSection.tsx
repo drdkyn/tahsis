@@ -270,7 +270,7 @@ export default function FormSection({
                   </>
                 ) : (
                   <>
-                    <strong>Esas Kapasite Kuralı:</strong> En fazla hangi kapsamda hizmetiniz (SSK, Bağ-Kur, Emekli Sandığı 4/c) varsa 
+                    <strong>Kapsam Kuralı:</strong> En fazla hangi kapsamda hizmetiniz (SSK, Bağ-Kur, Emekli Sandığı 4/c) varsa 
                     o kapsamda hesaplama yapınız. İşe girdikten sonra oluşan malüliyette (%60+) bu husus dikkate alınmaz.
                   </>
                 )}
