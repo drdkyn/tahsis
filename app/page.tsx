@@ -267,7 +267,9 @@ export default function Home() {
                 </div>
 
                 {/* 18 YAŞ KURALI BİLGİ NOTU */}
-                {status === '4a' && (() => {
+                {form.statular[0] === '4a' && (() => {
+                  const dogumTarihi = parseDate(form.dogumTarihi);
+                  const ilkGirisTarihi = parseDate(form.ilkIsGirisTarihi);
                   const ageAt18 = new Date(dogumTarihi);
                   ageAt18.setFullYear(ageAt18.getFullYear() + 18);
                   return ilkGirisTarihi < ageAt18;
@@ -368,8 +370,10 @@ export default function Home() {
                       {/* 18 YAŞ KURALI BİLGİ NOTU (HİZMET YILI VARSA) */}
                       {(() => {
                         const hasServiceYears = sonuc.kosullar.some(k => k.ad === 'Hizmet Yılı');
-                        if (!hasServiceYears || status !== '4a') return null;
+                        if (!hasServiceYears || form.statular[0] !== '4a') return null;
                         
+                        const dogumTarihi = parseDate(form.dogumTarihi);
+                        const ilkGirisTarihi = parseDate(form.ilkIsGirisTarihi);
                         const ageAt18 = new Date(dogumTarihi);
                         ageAt18.setFullYear(ageAt18.getFullYear() + 18);
                         
