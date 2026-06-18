@@ -47,6 +47,24 @@ function parseDate(str: string): Date {
   }
 }
 
+function dateToYMD(date: Date): { year: number; month: number; day: number } {
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+  };
+}
+
+function compareDates(date1: Date, date2: Date): number {
+  // Tarih karşılaştırması: YY-MM-DD bazında
+  const d1 = dateToYMD(date1);
+  const d2 = dateToYMD(date2);
+  
+  if (d1.year !== d2.year) return d1.year - d2.year;
+  if (d1.month !== d2.month) return d1.month - d2.month;
+  return d1.day - d2.day;
+}
+
 function formatDate(date: Date): string {
   return date.toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
@@ -272,7 +290,8 @@ export default function Home() {
                   const ilkGirisTarihi = parseDate(form.ilkIsGirisTarihi);
                   const ageAt18 = new Date(dogumTarihi);
                   ageAt18.setFullYear(ageAt18.getFullYear() + 18);
-                  return ilkGirisTarihi < ageAt18;
+                  // compareDates kullan: < 0 ise ilkGiriş, ageAt18'den öncedir
+                  return compareDates(ilkGirisTarihi, ageAt18) < 0;
                 })() && (
                   <div className="bg-blue-50 border border-blue-300 rounded-lg p-3">
                     <p className="text-xs text-blue-800">
@@ -377,7 +396,8 @@ export default function Home() {
                         const ageAt18 = new Date(dogumTarihi);
                         ageAt18.setFullYear(ageAt18.getFullYear() + 18);
                         
-                        if (ilkGirisTarihi >= ageAt18) return null; // 18+ yaşında girmişse gösterme
+                        // compareDates kullan: >= 0 ise 18+ yaşında girmişse gösterme
+                        if (compareDates(ilkGirisTarihi, ageAt18) >= 0) return null;
                         
                         return (
                           <div className="bg-blue-50 border border-blue-200 rounded p-2.5 mt-3 text-xs text-blue-700">
