@@ -135,9 +135,9 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
     for (const rule of statusRules.normal) {
       if (!isGecerli(rule)) continue;
       
-      // 4a'da 25 yıl şartı için: 18 yaş altı girişler, 18 yaştan başla
+      // 4a'da 18 yaş altı girişler için her kuralda hizmet yılını 18 yaştan hesapla
       let effectiveServiceYears = undefined;
-      if (status === '4a' && rule.serviceYears === 25) {
+      if (status === '4a') {
         const ageAt18 = new Date(dogumTarihi);
         ageAt18.setFullYear(ageAt18.getFullYear() + 18);
         
@@ -158,9 +158,9 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
     for (const rule of statusRules.age) {
       if (!isGecerli(rule)) continue;
       
-      // 4a'da 25 yıl şartı için: 18 yaş altı girişler, 18 yaştan başla
+      // 4a'da 18 yaş altı girişler için her kuralda hizmet yılını 18 yaştan hesapla
       let effectiveServiceYears = undefined;
-      if (status === '4a' && rule.serviceYears === 25) {
+      if (status === '4a') {
         const ageAt18 = new Date(dogumTarihi);
         ageAt18.setFullYear(ageAt18.getFullYear() + 18);
         
