@@ -242,6 +242,42 @@ export default function FormSection({
             ↩ Borçlanma nedeniyle öne çekilen giriş: <strong>{hesaplananIlkIsGirisTarihi}</strong>
           </p>
         )}
+        
+        {/* DİNAMİK BİLGİ NOTU - İlk işe giriş tarihine göre */}
+        {form.ilkIsGirisTarihi && (() => {
+          // Tarih formatını kontrol et
+          if (!/^\d{2}\.\d{2}\.\d{4}$/.test(form.ilkIsGirisTarihi)) return null;
+          
+          // Tarihi parse et
+          const [gün, ay, yıl] = form.ilkIsGirisTarihi.split('.').map(Number);
+          const tarih = new Date(yıl, ay - 1, gün);
+          const karşılaştırmaTarihi = new Date(2008, 9, 1); // 01.10.2008
+          
+          const önce = tarih < karşılaştırmaTarihi;
+          
+          return (
+            <div className={`mt-2.5 p-2.5 rounded border ${
+              önce 
+                ? 'bg-amber-50 border-amber-200' 
+                : 'bg-blue-50 border-blue-200'
+            }`}>
+              <p className={`text-xs ${önce ? 'text-amber-800' : 'text-blue-800'}`}>
+                <span className="mr-1.5">ℹ️</span>
+                {önce ? (
+                  <>
+                    <strong>3,5 Yıl Kuralı:</strong> Son 7 yılda hangi statüdeki hizmetiniz 1261 günden fazla ise, o kapsamda hesaplayınız. 
+                    İşe girdikten sonra oluşan malüliyette (%60+) bu husus dikkate alınmaz.
+                  </>
+                ) : (
+                  <>
+                    <strong>Esas Kapasite Kuralı:</strong> En fazla hangi kapsamda hizmetiniz (SSK, Bağ-Kur, Emekli Sandığı 4/c) varsa 
+                    o kapsamda hesaplama yapınız. İşe girdikten sonra oluşan malüliyette (%60+) bu husus dikkate alınmaz.
+                  </>
+                )}
+              </p>
+            </div>
+          );
+        })()}
       </div>
 
       {/* PRİM GÜNÜ + BORÇLANMA */}
