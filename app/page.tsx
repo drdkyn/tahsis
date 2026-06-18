@@ -326,7 +326,7 @@ export default function Home() {
                           sonuc.type === 'age' ? 'bg-orange-100 text-orange-700' :
                           'bg-blue-100 text-blue-700'
                         }`}>
-                          {sonuc.type === 'disability' ? 'Malüllük' : sonuc.type === 'age' ? 'Yaştan' : 'Normal'}
+                          {sonuc.type === 'disability' ? 'Malüllük/Engellilik' : sonuc.type === 'age' ? 'Yaştan' : 'Normal'}
                         </span>
                       </div>
 

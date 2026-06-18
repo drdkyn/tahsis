@@ -198,7 +198,7 @@ export function calculateRetirementOptionsDB(input: RetirementInput): Retirement
         
         const { kosullar, uygun } = buildKosullar(rule, effectiveServiceYears);
         results.push({ 
-          name: `Malüllük — ${disabilityRules.label}`, 
+          name: `Malüllük/Engellilik — ${disabilityRules.label}`, 
           type: 'disability', 
           uygun, 
           kosullar,
